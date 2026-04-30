@@ -148,15 +148,20 @@ import Layout from '../layouts/Layout.astro';
   const form = document.getElementById('loginForm') as HTMLFormElement;
   const errorMsg = document.getElementById('errorMsg') as HTMLElement;
 
+  const CREDENTIALS = {
+    username: 'admin',
+    password: 'Xk9#mP2$vL8@nQ4!'
+  };
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = (document.getElementById('username') as HTMLInputElement).value;
     const password = (document.getElementById('password') as HTMLInputElement).value;
 
-    if (username === 'demo' && password === 'demo123') {
+    if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
       window.location.href = '/dashboard';
     } else {
-      errorMsg.textContent = 'Invalid credentials. Use demo/demo123 for access.';
+      errorMsg.textContent = 'Access denied. Contact administrator.';
     }
   });
 </script>
