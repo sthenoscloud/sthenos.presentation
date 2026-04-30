@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sthenos.cloud — Behavioral Early Warning</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0b0e14; color: #e8eaed; }
+  .slide { min-height: 100vh; padding: 60px 80px; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid #1f2937; }
+  .slide-number { font-size: 11px; color: #6b7280; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; }
+  h1 { font-size: 42px; font-weight: 700; color: #f9fafb; line-height: 1.2; margin-bottom: 24px; }
+  h2 { font-size: 28px; font-weight: 600; color: #f9fafb; margin-bottom: 32px; }
+  h3 { font-size: 18px; font-weight: 600; color: #9ca3af; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+  p { font-size: 20px; line-height: 1.6; color: #d1d5db; max-width: 900px; }
+  .sub { font-size: 16px; color: #6b7280; margin-top: 12px; }
+  .tag { display: inline-block; background: #1f2937; color: #9ca3af; font-size: 11px; padding: 4px 10px; border-radius: 4px; margin-right: 8px; margin-bottom: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 28px; }
+  .card h4 { font-size: 15px; font-weight: 600; color: #f9fafb; margin-bottom: 12px; }
+  .card p { font-size: 15px; }
+  .big-stat { font-size: 64px; font-weight: 700; color: #60a5fa; line-height: 1; margin-bottom: 8px; }
+  .small { font-size: 14px; color: #6b7280; }
+  ul { list-style: none; }
+  ul li { font-size: 17px; color: #d1d5db; margin-bottom: 14px; padding-left: 24px; position: relative; line-height: 1.5; }
+  ul li::before { content: '→'; position: absolute; left: 0; color: #60a5fa; font-weight: bold; }
+  .arrow-row { display: flex; align-items: center; gap: 20px; margin: 32px 0; }
+  .arrow-step { background: #1f2937; padding: 16px 28px; border-radius: 8px; text-align: center; flex: 1; }
+  .arrow-step .step-label { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .arrow-step .step-value { font-size: 15px; color: #f9fafb; font-weight: 600; }
+  .arrow-symbol { font-size: 24px; color: #60a5fa; }
+  table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  th { text-align: left; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; padding: 12px 16px; border-bottom: 1px solid #1f2937; }
+  td { font-size: 15px; color: #d1d5db; padding: 16px; border-bottom: 1px solid #1f2937; vertical-align: top; }
+  td:first-child { color: #f9fafb; font-weight: 600; }
+  .contrast td { color: #60a5fa !important; }
+  .highlight-box { background: linear-gradient(135deg, #1e3a5f 0%, #111827 100%); border: 1px solid #2563eb; border-radius: 12px; padding: 32px; margin: 24px 0; }
+  .highlight-box p { color: #93c5fd; font-size: 19px; }
+  .layer-badge { display: inline-block; background: #1e3a5f; color: #60a5fa; font-size: 11px; padding: 3px 8px; border-radius: 4px; margin-right: 6px; vertical-align: middle; letter-spacing: 1px; }
+  .timeline { display: flex; gap: 0; margin-top: 32px; }
+  .timeline-item { flex: 1; padding: 24px; background: #111827; border: 1px solid #1f2937; border-right: none; }
+  .timeline-item:last-child { border-right: 1px solid #1f2937; border-radius: 0 12px 12px 0; }
+  .timeline-item:first-child { border-radius: 12px 0 0 12px; }
+  .timeline-item h5 { font-size: 13px; color: #60a5fa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .timeline-item p { font-size: 14px; }
+  .timeline-item .time { font-size: 11px; color: #6b7280; margin-bottom: 8px; }
+  .nav { position: fixed; bottom: 30px; right: 40px; display: flex; gap: 8px; z-index: 100; }
+  .nav button { background: #1f2937; color: #9ca3af; border: 1px solid #374151; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  .nav button:hover { background: #374151; color: #f9fafb; }
+  .cover-line { font-size: 13px; color: #60a5fa; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+  .cover-title { font-size: 56px; font-weight: 700; color: #f9fafb; line-height: 1.1; margin-bottom: 16px; }
+  .cover-sub { font-size: 22px; color: #9ca3af; margin-bottom: 48px; }
+  .cover-meta { font-size: 13px; color: #6b7280; }
+  .divider { height: 1px; background: #1f2937; margin: 40px 0; }
+  code { background: #1f2937; color: #60a5fa; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+  .mono { font-family: 'Consolas', monospace; font-size: 14px; }
+  .green { color: #34d399; }
+  .red { color: #f87171; }
+  .amber { color: #fbbf24; }
+  .layer-num { font-size: 48px; font-weight: 700; color: #60a5fa; line-height: 1; margin-bottom: 12px; }
+  .layer-title { font-size: 24px; font-weight: 700; color: #f9fafb; margin-bottom: 16px; }
+  .quote-box { background: #1f2937; border-radius: 8px; padding: 16px; margin-top: 16px; border-left: 3px solid #60a5fa; }
+  .quote-box p { font-size: 14px; color: #93c5fd; font-style: italic; }
+  .step-num { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .roadmap-item { margin-bottom: 20px; padding-left: 16px; border-left: 2px solid #374151; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: MISSION PROBLEM -->
+<div class="slide" id="s1">
+  <div class="slide-number">Slide 01 — Problem Statement</div>
+  <div class="cover-line">sthenos.cloud</div>
+  <div class="cover-title">Detecting Behavioral Transitions<br>Before Conventional Indicators</div>
+  <div class="cover-sub">Behavioral early-warning for multi-agent operational environments</div>
+  <div class="divider"></div>
+  <h3>The Operational Gap</h3>
+  <p>Current ISR and sensor fusion systems correlate observations. They answer: <em>Where? When? How fast?</em></p>
+  <p style="margin-top: 16px;">They fail at detecting:</p>
+  <ul style="margin-top: 20px;">
+    <li><strong>Emergent coordination</strong> — actors organizing before it becomes visible</li>
+    <li><strong>Behavioral regime shifts</strong> — the system entering a different operating state</li>
+    <li><strong>Pre-event instability</strong> — precursors before kinetic indicators emerge</li>
+    <li><strong>Signal vs. noise</strong> — distinguishing meaningful activity from ordinary movement</li>
+  </ul>
+  <div class="highlight-box" style="margin-top: 32px;">
+    <p>"We do not just track motion. We detect when a system of actors is changing state before conventional indicators make it obvious."</p>
+  </div>
+  <div class="cover-meta" style="margin-top: 32px;">UNCLASSIFIED // FOR OFFICIAL USE ONLY</div>
+</div>
+
+<!-- SLIDE 2: THE CAPABILITY -->
+<div class="slide" id="s2">
+  <div class="slide-number">Slide 02 — The Capability</div>
+  <h1 style="margin-bottom: 8px;">Observe → Understand → Anticipate</h1>
+  <p style="margin-bottom: 40px;">A three-layer behavioral early-warning system. Not tracking. Not anomaly detection. <strong>Regime-aware inference.</strong></p>
+
+  <div class="grid-3">
+    <!-- LAYER 1 -->
+    <div class="card">
+      <div class="layer-num">1</div>
+      <div class="layer-title">OBSERVE</div>
+      <p style="font-size: 14px; color: #9ca3af; margin-bottom: 16px;">Raw movement → Operational interaction picture</p>
+      <ul>
+        <li style="font-size: 14px;">Multi-agent trajectories</li>
+        <li style="font-size: 14px;">Spatial relationships</li>
+        <li style="font-size: 14px;">Who moved toward whom</li>
+        <li style="font-size: 14px;">Temporal evolution</li>
+      </ul>
+      <div class="quote-box">
+        <p>"Transforms dispersed movement into an evolving interaction picture exposing relationships invisible in raw tracks."</p>
+      </div>
+    </div>
+    <!-- LAYER 2 -->
+    <div class="card" style="border-color: #2563eb;">
+      <div class="layer-num" style="color: #93c5fd;">2</div>
+      <div class="layer-title" style="color: #93c5fd;">UNDERSTAND</div>
+      <p style="font-size: 14px; color: #9ca3af; margin-bottom: 16px;">Behavioral intelligence — the differentiator</p>
+      <ul>
+        <li style="font-size: 14px;"><strong>Coordination indicators</strong> — graph connectivity shifts, interaction persistence</li>
+        <li style="font-size: 14px;"><strong>Instability indicators</strong> — spectral gap changes, topology reorganization</li>
+        <li style="font-size: 14px;"><strong>Role inference</strong> — scout / attacker / defender behavioral signatures</li>
+        <li style="font-size: 14px;"><strong>Pressure distribution</strong> — density, threat, escape fractions</li>
+      </ul>
+      <div class="quote-box" style="border-left-color: #93c5fd;">
+        <p style="color: #93c5fd;">"Detects whether actors are becoming coordinated, fragmented, or unstable — before the event is visible."</p>
+      </div>
+    </div>
+    <!-- LAYER 3 -->
+    <div class="card">
+      <div class="layer-num">3</div>
+      <div class="layer-title">ANTICIPATE</div>
+      <p style="font-size: 14px; color: #9ca3af; margin-bottom: 16px;">Regime transition detection — early warning</p>
+      <ul>
+        <li style="font-size: 14px;"><strong>Stability assessment</strong> — is the system staying in regime?</li>
+        <li style="font-size: 14px;"><strong>Transition detection</strong> — regime shift alerts</li>
+        <li style="font-size: 14px;"><strong>Escalation precursors</strong> — behavioral indicators of coordination risk</li>
+        <li style="font-size: 14px;"><strong>Decision support cues</strong> — compressed summary for analysts</li>
+      </ul>
+      <div class="quote-box">
+        <p>"Estimates when the environment is transitioning toward coordination, escalation, or reorganization."</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: SYSTEM ARCHITECTURE -->
+<div class="slide" id="s3">
+  <div class="slide-number">Slide 03 — System Architecture</div>
+  <h1>Behavioral Early Warning Architecture</h1>
+
+  <div class="arrow-row">
+    <div class="arrow-step">
+      <div class="step-label">DATA SOURCES</div>
+      <div class="step-value">Multi-agent trajectories<br>ISR / sensor feeds<br>Terrain context<br>Event histories</div>
+    </div>
+    <div class="arrow-symbol">→</div>
+    <div class="arrow-step">
+      <div class="step-label">INTERACTION ENGINE</div>
+      <div class="step-value">Dynamic interaction graph<br>Spatial constraints<br>Relational features<br>Engagement state machine</div>
+    </div>
+    <div class="arrow-symbol">→</div>
+    <div class="arrow-step">
+      <div class="step-label">BEHAVIORAL INTELLIGENCE</div>
+      <div class="step-value">Coordination indicators<br>Role inference<br>Stability metrics<br>Graph-conditioned augments</div>
+    </div>
+    <div class="arrow-symbol">→</div>
+    <div class="arrow-step">
+      <div class="step-label">REGIME ENGINE</div>
+      <div class="step-value">Stability probes<br>Transition detection<br>Escalation precursors<br>Lagged topology signals</div>
+    </div>
+    <div class="arrow-symbol">→</div>
+    <div class="arrow-step">
+      <div class="step-label">DECISION SUPPORT</div>
+      <div class="step-value">Coordination risk alerts<br>Regime shift warnings<br>Escalation indicators<br>Analyst cues</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>Capability vs. Commodity</h3>
+  <table>
+    <tr>
+      <th>Conventional Systems</th>
+      <th>sthenos.cloud</th>
+    </tr>
+    <tr>
+      <td>Track objects</td>
+      <td>Model behavior</td>
+    </tr>
+    <tr>
+      <td>Detect events</td>
+      <td>Detect <strong style="color: #60a5fa;">transitions before events</strong></td>
+    </tr>
+    <tr>
+      <td>Situational awareness</td>
+      <td>State-change awareness</td>
+    </tr>
+    <tr>
+      <td>Monitoring</td>
+      <td>Anticipatory decision support</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SLIDE 4: OPERATIONAL DEMONSTRATION -->
+<div class="slide" id="s4">
+  <div class="slide-number">Slide 04 — Operational Demonstration</div>
+  <h1>One Scenario: Normal → Coordinated → Warning</h1>
+  <p>The system processed 118 entities across 398 timesteps (46,700+ entity-tick observations). Watch how the behavioral layer reveals what tracking misses.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time">STEP 1 — Baseline</div>
+      <h5>Normal Patrol</h5>
+      <p>Distributed movement. Moderate interaction graph density. Spectral gap stable. Role distribution matches expected operational pattern.</p>
+      <div style="margin-top: 12px;">
+        <span class="tag" style="color: #34d399; border-color: #34d399;">Tracking: NORMAL</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">STEP 2 — Coordination begins</div>
+      <h5>Graph tightens</h5>
+      <p>Edge persistence increases. Multiple entities show decreasing inter-distance simultaneously. Coordination indicators rise.</p>
+      <div style="margin-top: 12px;">
+        <span class="tag" style="color: #34d399; border-color: #34d399;">Tracking: NORMAL</span>
+        <span class="tag" style="color: #fbbf24; border-color: #fbbf24;">Behavioral: RISING</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">STEP 3 — Instability emerges</div>
+      <h5>Regime transition</h5>
+      <p>Spectral gap shifts. Role transition entropy increases. Entities switch behavioral patterns. System flags pre-event instability.</p>
+      <div style="margin-top: 12px;">
+        <span class="tag" style="color: #34d399; border-color: #34d399;">Tracking: NORMAL</span>
+        <span class="tag" style="color: #fbbf24; border-color: #fbbf24;">Behavioral: REGIME SHIFT</span>
+        <span class="tag" style="color: #f87171; border-color: #f87171;">Warning: ISSUED</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">STEP 4 — Visible event</div>
+      <h5>Coordination overt</h5>
+      <p>Conventional tracking now shows organized behavior. System issued early warning before overt indicators were apparent.</p>
+      <div style="margin-top: 12px;">
+        <span class="tag" style="color: #f87171; border-color: #f87171;">Tracking: EVENT VISIBLE</span>
+        <span class="tag" style="color: #f87171; border-color: #f87171;">Warning: CONFIRMED</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top: 32px;">
+    <p><strong>Formula:</strong> Raw tracks → Behavioral indicators → Regime shift detection → Early warning → Decision advantage</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: OPERATIONAL VALUE -->
+<div class="slide" id="s5">
+  <div class="slide-number">Slide 05 — Operational Value</div>
+  <h1>Measured System Performance</h1>
+
+  <div class="grid-2">
+    <div>
+      <div class="big-stat">118</div>
+      <div class="small">entities processed per match</div>
+      <div style="margin-top: 24px;">
+        <div class="big-stat">398</div>
+        <div class="small">timesteps per match</div>
+      </div>
+      <div style="margin-top: 24px;">
+        <div class="big-stat">46,700+</div>
+        <div class="small">entity-tick observations per run</div>
+      </div>
+      <div style="margin-top: 24px;">
+        <div class="big-stat">0.998</div>
+        <div class="small">signal confidence (high quality)</div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-bottom: 20px;">Problem Classes Addressed</h3>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Pattern-of-life ambiguity</h4>
+        <p>Separates ordinary activity from meaningful behavioral change using regime-conditioned inference.</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Early warning gap</h4>
+        <p>Graph spectral shift and interaction topology change detect precursors before kinetic indicators emerge.</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Multi-agent complexity</h4>
+        <p>Compresses 118-agent coordination patterns into analyst-actionable indicators — humans cannot track this in real time.</p>
+      </div>
+      <div class="card">
+        <h4>Decision latency</h4>
+        <p>From raw tracks to decision cue in seconds. Compressed behavioral summary vs. analyst-only workflows.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>Diagnostic Integrity (Match 0)</h3>
+  <table>
+    <tr>
+      <th>Check</th>
+      <th>Result</th>
+      <th>Interpretation</th>
+    </tr>
+    <tr>
+      <td>Pressure distribution</td>
+      <td class="green">✓ Non-degenerate</td>
+      <td>System produces structured output, not noise</td>
+    </tr>
+    <tr>
+      <td>Neighbor distribution</td>
+      <td class="green">✓ Non-uniform</td>
+      <td>Clustering present and detectable</td>
+    </tr>
+    <tr>
+      <td>Alignment skew</td>
+      <td class="green">✓ Present</td>
+      <td>Statistically significant behavioral patterns</td>
+    </tr>
+    <tr>
+      <td>Signal confidence</td>
+      <td class="green">✓ OK (0.998)</td>
+      <td>High-quality data throughout processing</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SLIDE 6: DEPLOYMENT & ROADMAP -->
+<div class="slide" id="s6">
+  <div class="slide-number">Slide 06 — Deployment & Roadmap</div>
+  <h1>From Prototype to Operational Capability</h1>
+
+  <div class="grid-2">
+    <div>
+      <h3 style="margin-bottom: 20px;">Deployment Requirements</h3>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Data inputs</h4>
+        <p>Multi-agent trajectory streams (position + velocity per timestep). Standard ISR formats. Optional terrain context for spatial constraints.</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Compute footprint</h4>
+        <p>Python-native, offline-capable. No external network calls at runtime. Scales with entity count × timesteps.</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Integration path</h4>
+        <p>WISDOM-aligned JSON schema (v1 contract, documented). Full decision audit trail per entity. Regime reports with observable-level explanation.</p>
+      </div>
+      <div class="card">
+        <h4>Adaptability</h4>
+        <p>Role inference rules are tunable. Graph observables are parameterizable. Regime taxonomy is documented and extendable.</p>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-bottom: 20px;">Capability Roadmap</h3>
+      <div style="padding-left: 16px; border-left: 2px solid #374151; margin-bottom: 24px;">
+        <div class="roadmap-item">
+          <span class="tag" style="color: #34d399; border-color: #34d399;">NOW</span>
+          <strong style="display: block; color: #f9fafb; margin-top: 6px;">Analyst decision support</strong>
+          <p class="small" style="margin-top: 4px;">Role inference, regime reports, behavioral indicators</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="tag">NEXT</span>
+          <strong style="display: block; color: #f9fafb; margin-top: 6px;">ISR integration</strong>
+          <p class="small" style="margin-top: 4px;">Sensor fusion pipeline, real-time streaming mode</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="tag">FUTURE</span>
+          <strong style="display: block; color: #f9fafb; margin-top: 6px;">Edge deployment</strong>
+          <p class="small" style="margin-top: 4px;">Embedded runtime, tactical edge compute</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="tag">LONG-TERM</span>
+          <strong style="display: block; color: #f9fafb; margin-top: 6px;">Autonomy support</strong>
+          <p class="small" style="margin-top: 4px;">Synthetic training data generation, multi-agent simulation</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Anchor statement:</strong><br>"Behavioral early-warning capability that converts movement data into detection of coordination, instability, and regime shifts — giving decision-makers earlier warning and reduced uncertainty in contested environments."</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+  <button onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">1</button>
+  <button onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">2</button>
+  <button onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">3</button>
+  <button onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">4</button>
+  <button onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">5</button>
+  <button onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">6</button>
+</div>
+
+</body>
+</html>

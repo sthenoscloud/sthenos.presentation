@@ -1,10 +1,5 @@
 ---
-interface Props {
-  title: string;
-  description?: string;
-}
-
-const { title, description = "AI Backbone for Next-Gen C2 Systems - Defense-grade Security Platform" } = Astro.props;
+const { title, description = "Platform Demonstration" } = Astro.props;
 ---
 
 <!doctype html>
@@ -12,12 +7,11 @@ const { title, description = "AI Backbone for Next-Gen C2 Systems - Defense-grad
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body>
     <slot />
@@ -26,30 +20,26 @@ const { title, description = "AI Backbone for Next-Gen C2 Systems - Defense-grad
 
 <style is:global>
   :root {
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #111111;
-    --bg-tertiary: #1a1a1a;
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-    --text-muted: #666666;
-    --accent: #3b82f6;
-    --accent-secondary: #60a5fa;
-    --border: #222222;
-    --border-light: #333333;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --primary: #6366f1;
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --accent: #818cf8;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html {
     font-family: var(--font-sans);
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: var(--bg-dark);
+    color: var(--text-main);
     scroll-behavior: smooth;
   }
 
@@ -58,21 +48,10 @@ const { title, description = "AI Backbone for Next-Gen C2 Systems - Defense-grad
     line-height: 1.6;
   }
 
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { color: var(--accent); }
+
   code, pre {
     font-family: var(--font-mono);
-  }
-
-  a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: var(--accent-secondary);
-  }
-
-  ::selection {
-    background: var(--accent);
-    color: white;
   }
 </style>
