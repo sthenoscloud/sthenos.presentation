@@ -1,0 +1,193 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Architecture: Pipeline - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/drill">Drill</a>
+    <a href="/drill/Architecture">Architecture</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Architecture → Pipeline</p>
+      <h1>Pipeline</h1>
+      <p>Diagnostic runner and pipeline orchestration — coordinates the enrichment flow.</p>
+      <div class="stat-chips">
+        <span>9 files</span>
+        <span>0 classes</span>
+        <span>7 functions</span>
+        <span>7 edges</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="component-list">
+      <h2>Pipeline Components (9)</h2>
+      <div class="component-grid">
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">compute_match_summary</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">load_caldera_breadcrumbs</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">main</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">pipeline/__init__.py</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">pipeline/runner.py</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">plot_behavior_timeseries</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">plot_diagnostics</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">run_diagnostics</span>
+        </div>
+        <div class="component-item">
+          <span class="component-dot" style="background: #8b5cf6"></span>
+          <span class="component-name">run_pipeline</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend" style="margin-top: 48px;">
+      <h3>Node Types</h3>
+      <div class="legend-item">
+        <div class="legend-shape" style="background: #8b5cf6; border-radius: 4px;"></div>
+        <span>File / Module</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-shape" style="background: #1e293b; border-radius: 50%; border: 2px solid #8b5cf6;"></div>
+        <span>Class</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-shape" style="background: #0f172a; border: 1px solid #475569; transform: rotate(45deg);"></div>
+        <span>Function</span>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 24px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .content-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .stat-chips {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .stat-chips span {
+    padding: 6px 12px;
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .component-list h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+  }
+
+  .component-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 8px;
+  }
+
+  .component-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .component-name {
+    font-size: 13px;
+    font-family: 'D-DIN', monospace;
+  }
+
+  .legend h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .legend-shape {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    nav { gap: 16px; flex-wrap: wrap; }
+    nav a { font-size: 10px; }
+    .component-grid { grid-template-columns: 1fr; }
+  }
+</style>
