@@ -7,7 +7,7 @@ const modules = [
     color: '#6366f1',
     desc: 'Core entity, team, and capability models — the foundational data structures used across all layers.',
     stats: ['14 files', '10 classes', '0 functions', '10 edges'],
-    available: false
+    available: true
   },
   {
     name: 'Enrichment',
@@ -35,7 +35,7 @@ const modules = [
     color: '#8b5cf6',
     desc: 'Diagnostic runner and pipeline orchestration — coordinates the enrichment flow.',
     stats: ['9 files', '0 classes', '7 functions', '7 edges'],
-    available: false
+    available: true
   },
   {
     name: 'Roles',
@@ -92,13 +92,13 @@ const modules = [
         <div class={`module-card ${!mod.available ? 'disabled' : ''}`}>
           <div class="card-header">
             <div class="card-dot" style={`background: ${mod.color}`}></div>
-            <h2>{mod.name}</h2>
+            {mod.available ? <a href={`/drill/Architecture_${mod.name}`} class="card-link"><h2>{mod.name}</h2></a> : <h2>{mod.name}</h2>}
           </div>
           <p>{mod.desc}</p>
           <div class="card-stats">
             {mod.stats.map(stat => <span>{stat}</span>)}
           </div>
-          {!mod.available && <span class="coming-soon">Coming Soon</span>}
+          {!mod.available && <span class="locked">Locked — Needs Permission</span>}
         </div>
       ))}
     </div>
@@ -218,17 +218,26 @@ const modules = [
     letter-spacing: 0.5px;
   }
 
-  .coming-soon {
+  .locked {
     display: inline-block;
     margin-top: 16px;
     padding: 6px 12px;
-    background: rgba(240, 240, 250, 0.1);
-    border: 1px solid rgba(240, 240, 250, 0.2);
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
     border-radius: 20px;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    opacity: 0.6;
+    color: #ef4444;
+  }
+
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card-link:hover h2 {
+    opacity: 0.8;
   }
 
   @media (max-width: 768px) {
