@@ -9,11 +9,11 @@ const pages = [
   { name: '05_system_dynamics', title: 'System Dynamics', desc: 'Temporal behavior, feedback loops, and stability characteristics', available: true },
   { name: '06_operational_scenarios', title: 'Operational Scenarios', desc: 'Real-world deployment constraints and system responses', available: true },
   { name: 'Architecture', title: 'Architecture Overview', desc: '7-Layer Defense AI Platform overview', available: true },
-  { name: 'Architecture_Core', title: 'Architecture - Core', desc: 'Core entity, team, and capability models', available: false },
+  { name: 'Architecture_Core', title: 'Architecture - Core', desc: 'Core entity, team, and capability models', available: true },
   { name: 'Architecture_Enrichment', title: 'Architecture - Enrichment', desc: 'Feature extraction, normalization, and behavioral inference', available: false },
   { name: 'Architecture_Ingestion', title: 'Architecture - Ingestion', desc: 'USD loading and breadcrumbs parsing', available: false },
   { name: 'Architecture_IO', title: 'Architecture - IO', desc: 'World state adapter and diagnostics', available: false },
-  { name: 'Architecture_Pipeline', title: 'Architecture - Pipeline', desc: 'Diagnostic runner and pipeline orchestration', available: false },
+  { name: 'Architecture_Pipeline', title: 'Architecture - Pipeline', desc: 'Diagnostic runner and pipeline orchestration', available: true },
   { name: 'Architecture_Roles', title: 'Architecture - Roles', desc: 'Rule evaluation, score aggregation, and role classification', available: false },
   { name: 'Architecture_Evaluation', title: 'Architecture - Evaluation', desc: 'Synthetic validation and adapter diagnostics', available: false },
   { name: 'Architecture_Evaluation_Metrics', title: 'Architecture - Eval Metrics', desc: 'Evaluation metrics and testing', available: false },
@@ -68,7 +68,7 @@ const unavailablePages = pages.filter(p => !p.available);
           <div class="page-card disabled">
             <h3>{page.title}</h3>
             <p>{page.desc}</p>
-            <span class="coming-soon">Coming Soon</span>
+            <span class="locked">Locked</span>
           </div>
         ))}
       </div>
@@ -154,7 +154,7 @@ const unavailablePages = pages.filter(p => !p.available);
     opacity: 0.5;
   }
 
-  .coming-soon {
+  .locked {
     display: inline-block;
     margin-top: 16px;
     padding: 6px 12px;
