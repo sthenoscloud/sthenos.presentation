@@ -37,8 +37,18 @@ form.addEventListener('submit', async (e) => {
     <div class="content">
       <p class="label">Platform Demonstration</p>
       <h1>7-Layer Defense AI</h1>
-      <p>Transform incomplete operational datasets into actionable simulation environments for defense AI. The L3 MVP core produces WISDOM-aligned JSON with decision traces.</p>
-      <a href="/dashboard" class="ghost-btn">Enter Platform</a>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter username" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter password" required />
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+        <p id="errorMsg" class="error"></p>
+      </form>
       <p class="disclaimer">UNCLASSIFIED // FOR DEMONSTRATION PURPOSES ONLY. This system is a conceptual prototype and does not represent an operational defense capability. No real operational data, classified information, or personally identifiable information is stored or processed.</p>
     </div>
   </section>
