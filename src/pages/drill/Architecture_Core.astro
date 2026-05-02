@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="Architecture: Core - Sthenos">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
   <nav>
     <a href="/">Sthenos</a>
     <a href="/dashboard">Dashboard</a>
@@ -10,204 +15,176 @@ import Layout from '../../layouts/Layout.astro';
     <a href="/drill/Architecture">Architecture</a>
   </nav>
 
-  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80');">
-    <div class="content">
-      <p class="label">Architecture → Core</p>
+  <div class="header">
+    <div style="display:flex;align-items:center">
       <h1>Core</h1>
-      <p>Core entity, team, and capability models — the foundational data structures used across all layers.</p>
-      <div class="stat-chips">
-        <span>14 files</span>
-        <span>10 classes</span>
-        <span>0 functions</span>
-        <span>10 edges</span>
-      </div>
+      <span class="breadcrumb">Architecture → <a href="/drill/Architecture">Core</a></span>
     </div>
-  </section>
+    <div class="header-meta">
+      <span class="stat-chip">14 files</span>
+      <span class="stat-chip">10 classes</span>
+      <span class="stat-chip">0 functions</span>
+      <span class="stat-chip">10 edges</span>
+    </div>
+  </div>
 
-  <section class="content-section">
-    <div class="component-list">
-      <h2>Core Components (14)</h2>
-      <div class="component-grid">
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">AlignmentMetrics</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">EntityMetadata</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">EntityWithBreadcrumbs</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">FeatureInput</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">FeatureStateMachine</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">FeatureVector</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">InteractionSignals</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">NeighborhoodStats</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">PressureMetrics</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">PressureState</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">__init__.py</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">core/__init__.py</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">core/entity.py</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #6366f1"></span>
-          <span class="component-name">core/types.py</span>
-        </div>
-      </div>
-    </div>
+  <nav class="nav">
+    <a href="/drill/Architecture">Overview</a>
+    <a href="/drill/Architecture_Core" class="active">Core</a>
+    <a href="/drill/Architecture_Enrichment">Enrichment</a>
+    <a href="/drill/Architecture_Ingestion">Ingestion</a>
+    <a href="/drill/Architecture_IO">IO</a>
+    <a href="/drill/Architecture_Pipeline">Pipeline</a>
+    <a href="/drill/Architecture_Roles">Roles</a>
+    <a href="/drill/Architecture_Evaluation_Metrics">Eval Metrics</a>
+    <a href="/drill/Architecture_Evaluation_Splits">Eval Splits</a>
+    <a href="/drill/Architecture_Evaluation_Stability">Eval Stability</a>
+    <a href="/drill/Architecture_CLI">CLI</a>
+  </nav>
 
-    <div class="legend" style="margin-top: 48px;">
-      <h3>Node Types</h3>
-      <div class="legend-item">
-        <div class="legend-shape" style="background: #6366f1; border-radius: 4px;"></div>
-        <span>File / Module</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-shape" style="background: #1e293b; border-radius: 50%; border: 2px solid #6366f1;"></div>
-        <span>Class</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-shape" style="background: #0f172a; border: 1px solid #475569; transform: rotate(45deg);"></div>
-        <span>Function</span>
-      </div>
+  <input class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
+  <div id="mynetwork"></div>
+
+  <div class="panel" id="panel">
+    <h3>Core Components (14)</h3>
+    <div id="cluster-list">
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">AlignmentMetrics</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">EntityMetadata</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">EntityWithBreadcrumbs</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">FeatureInput</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">FeatureStateMachine</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">FeatureVector</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">InteractionSignals</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">NeighborhoodStats</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">PressureMetrics</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">PressureState</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">__init__.py</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">core/__init__.py</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">core/entity.py</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#6366f1"></div><span class="cluster-name">core/types.py</span></div>
     </div>
-  </section>
+  </div>
+
+  <div class="legend">
+    <h3>Node Types</h3>
+    <div class="legend-item"><div class="legend-shape" style="background:#6366f1;border-radius:4px"></div> File / Module</div>
+    <div class="legend-item"><div class="legend-shape" style="background:#1e293b;border-radius:50%;border:2px solid #6366f1"></div> Class</div>
+    <div class="legend-item"><div class="legend-shape" style="background:#0f172a;border:1px solid #475569;transform:rotate(45deg)"></div> Function</div>
+    <div class="legend-item"><div style="width:30px;height:2px;background:#f472b6;border-radius:1px"></div> Cross-module import</div>
+    <div class="legend-item"><div style="width:30px;height:2px;background:#6366f1;opacity:0.4;border-radius:1px"></div> Contains / defines</div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    var nodes = new vis.DataSet([
+      {"id":0,"label":"__init__.py","title":"__init__.py\nClasses: 0\nFunctions: 0\n\nPackage init for core module — no-op","color":{"background":"#6366f1","border":"#6366f1","highlight":{"background":"#6366f1","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":0,"y":-3.6,"cluster":"Core"},
+      {"id":1,"label":"core/__init__.py","title":"core/__init__.py\nClasses: 0\nFunctions: 0\n\nCore package init","color":{"background":"#6366f1","border":"#6366f1","highlight":{"background":"#6366f1","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":0,"y":-1.8,"cluster":"Core"},
+      {"id":2,"label":"core/types.py","title":"core/types.py\nClasses: 6\nFunctions: 0\n\nCore type definitions: FeatureInput, FeatureVector, AlignmentMetrics, PressureMetrics, PressureState","color":{"background":"#6366f1","border":"#6366f1","highlight":{"background":"#6366f1","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":0,"y":0.0,"cluster":"Core"},
+      {"id":3,"label":"InteractionSignals","title":"Class: InteractionSignals\nMethods: \n\nInteraction signals between entities: proximity, approach, retreat indicators","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":0.0,"cluster":"Core"},
+      {"id":4,"label":"PressureMetrics","title":"Class: PressureMetrics\nMethods: \n\nPressure metrics: threat fraction, engagement score, neighbor counts","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":0.0,"cluster":"Core"},
+      {"id":5,"label":"PressureState","title":"Class: PressureState\nMethods: \n\nPressure state machine: computes pressure phase from threat metrics","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":0.0,"cluster":"Core"},
+      {"id":6,"label":"FeatureStateMachine","title":"Class: FeatureStateMachine\nMethods: \n\nFeature state machine for temporal smoothing of features","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":0.0,"cluster":"Core"},
+      {"id":7,"label":"AlignmentMetrics","title":"Class: AlignmentMetrics\nMethods: \n\nAlignment metrics: direction alignment, speed alignment, combined alignment score","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":0.0,"cluster":"Core"},
+      {"id":8,"label":"NeighborhoodStats","title":"Class: NeighborhoodStats\nMethods: \n\nNeighborhood statistics for entity: counts, densities, closest entities","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":0.0,"cluster":"Core"},
+      {"id":9,"label":"core/entity.py","title":"core/entity.py\nClasses: 4\nFunctions: 0\n\nEntity model: EntityMetadata, EntityWithBreadcrumbs with duration/position helpers","color":{"background":"#6366f1","border":"#6366f1","highlight":{"background":"#6366f1","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":0,"y":1.8,"cluster":"Core"},
+      {"id":10,"label":"EntityMetadata","title":"Class: EntityMetadata\nMethods: \n\nEntity metadata: ID, team, class, position history","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":1.8,"cluster":"Core"},
+      {"id":11,"label":"EntityWithBreadcrumbs","title":"Class: EntityWithBreadcrumbs\nMethods: duration, mean_position, to_feature_input\n\nEntity with breadcrumb traces: computes duration, mean position, to FeatureInput","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":2.7,"cluster":"Core"},
+      {"id":12,"label":"FeatureInput","title":"Class: FeatureInput\nMethods: \n\nFeature input dataclass: raw features before normalization","color":{"background":"#1e293b","border":"#6366f1","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":1.5,"y":1.8,"cluster":"Core"}
+    ]);
+    var edges = new vis.DataSet([
+      {"from": 2, "to": 3, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 2, "to": 4, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 2, "to": 5, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 2, "to": 6, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 2, "to": 7, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 2, "to": 8, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 9, "to": 10, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 9, "to": 11, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 9, "to": 12, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"},
+      {"from": 9, "to": 13, "color": {"color": "#6366f1", "opacity": 0.4}, "arrows": "to"}
+    ]);
+    var container = document.getElementById('mynetwork');
+    var data = {nodes:nodes, edges:edges};
+    var options = {
+      physics:{enabled:true,barnesHut:{gravitationalConstant:-3000,centralGravity:0.3,springLength:120,springConstant:0.04,damping:0.09},stabilization:{iterations:150}},
+      nodes:{borderWidth:1,shadow:{enabled:true,size:'10px',x:0,y:4,color:'rgba(0,0,0,0.4)'}},
+      edges:{width:1,smooth:{type:'continuous',forceDirection:'none'}},
+      interaction:{hover:true,tooltipDelay:200,hideEdgesOnDrag:true,zoomView:true},
+      layout:{improvedLayout:true,hierarchical:{enabled:false}},
+      groups:{}
+    };
+    var network = new vis.Network(container,data,options);
+    network.on('stabilizationIterationsDone',function(){network.setOptions({physics:{enabled:false}})});
+    network.on('hoverNode',function(props){
+      var node = nodes.get(props.node);
+      var tooltip = document.getElementById('tooltip');
+      tooltip.innerHTML = node.title.replace(/\n/g,'<br>');
+      tooltip.style.display = 'block';
+      tooltip.style.left = (props.event.offsetX+15) + 'px';
+      tooltip.style.top = (props.event.offsetY+15) + 'px';
+    });
+    network.on('blurNode',function(){document.getElementById('tooltip').style.display='none'});
+    network.on('click',function(props){
+      if(props.nodes.length>0){
+        var node = nodes.get(props.nodes[0]);
+        document.getElementById('search').value = node.label;
+        filterNodes(node.label);
+      }
+    });
+    function filterNodes(term){
+      term=term.toLowerCase();
+      if(!term){nodes.updateAll().forEach(function(n){n.opacity=1});return;}
+      nodes.forEach(function(n){
+        var match = n.label.toLowerCase().includes(term) || (n.title&&n.title.toLowerCase().includes(term));
+        nodes.update({id:n.id,opacity:match?1:0.15,font:{size:match?13:9}});
+      });
+    }
+    network.on('hoverNode',function(props){
+      var node = nodes.get(props.node);
+      if(node&&node.cluster){
+        nodes.forEach(function(n){
+          if(n.cluster===node.cluster){
+            nodes.update({id:n.id,opacity:1});
+          } else if(!document.getElementById('search').value) {
+            nodes.update({id:n.id,opacity:0.6});
+          }
+        });
+      }
+    });
+  </script>
 </Layout>
 
 <style>
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    gap: 24px;
-    padding: 24px 5%;
-    z-index: 100;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
-  }
-
-  nav a {
-    text-transform: uppercase;
-    letter-spacing: 1.17px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .content-section {
-    background: var(--space-black);
-    padding: 80px 5%;
-  }
-
-  .stat-chips {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-
-  .stat-chips span {
-    padding: 6px 12px;
-    background: rgba(99, 102, 241, 0.15);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 20px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .component-list h2 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-    margin-bottom: 24px;
-  }
-
-  .component-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-  }
-
-  .component-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: var(--ghost-surface);
-    border: 1px solid var(--ghost-border);
-    border-radius: 8px;
-  }
-
-  .component-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .component-name {
-    font-size: 13px;
-    font-family: 'D-DIN', monospace;
-  }
-
-  .legend h3 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-    margin-bottom: 16px;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-    font-size: 12px;
-  }
-
-  .legend-shape {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 768px) {
-    nav { gap: 16px; flex-wrap: wrap; }
-    nav a { font-size: 10px; }
-    .component-grid { grid-template-columns: 1fr; }
-  }
+  :root{--primary:#6366f1;--bg-dark:#0f172a;--bg-card:rgba(30,41,59,0.7);--border:rgba(255,255,255,0.1);--text-main:#f8fafc;--text-dim:#94a3b8;--accent:#818cf8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Outfit',sans-serif;background-color:var(--bg-dark);background-image:radial-gradient(at 0% 0%, rgba(99,102,241,0.15) 0px, transparent 50%),radial-gradient(at 100% 100%, rgba(129,140,248,0.1) 0px, transparent 50%);color:var(--text-main);overflow:hidden;height:100vh}
+  .header{position:fixed;top:20px;left:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 24px;border-radius:16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .header h1{font-size:16px;font-weight:600;background:linear-gradient(135deg,#6366f1,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .header-meta{display:flex;gap:16px;font-size:12px;color:var(--text-dim)}
+  .stat-chip{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:4px 10px;border-radius:20px;font-size:11px}
+  .breadcrumb{font-size:12px;color:var(--text-dim);margin-left:16px}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--text-main)}
+  #mynetwork{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1}
+  .panel{position:fixed;bottom:20px;left:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border);max-width:320px;max-height:300px;overflow-y:auto}
+  .panel h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+  .cluster-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+  .cluster-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .cluster-name{flex:1;font-weight:500}
+  .cluster-stats{color:var(--text-dim);font-size:11px;font-family:'JetBrains Mono',monospace}
+  .legend{position:fixed;bottom:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border)}
+  .legend h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+  .legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+  .legend-shape{width:14px;height:14px;border-radius:3px}
+  .tooltip{position:absolute;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;pointer-events:none;z-index:2000;max-width:300px;display:none}
+  .tooltip b{color:var(--accent)}
+  .search{position:fixed;top:20px;right:300px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--text-main);outline:none;width:200px}
+  .search:focus{border-color:var(--primary)}
+  .nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:4px;background:var(--bg-card);backdrop-filter:blur(12px);padding:6px 12px;border-radius:12px;border:1px solid var(--border);font-size:11px}
+  .nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
+  .nav a:hover{background:rgba(255,255,255,0.1);color:var(--text-main)}
+  .nav a.active{background:#6366f1;color:white}
+  nav{position:fixed;top:0;left:0;right:0;display:flex;gap:24px;padding:24px 5%;z-index:100;background:linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)}
+  nav a{text-transform:uppercase;letter-spacing:1.17px;font-size:11px;font-weight:700}
 </style>

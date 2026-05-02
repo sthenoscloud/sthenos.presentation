@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Architecture: Evaluation Metrics - Sthenos">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <div class="header">
+    <div style="display:flex;align-items:center">
+      <h1>Evaluation: Metrics & Reporting</h1>
+      <span class="breadcrumb">Architecture → <a href="/drill/Architecture">Eval Metrics</a></span>
+    </div>
+    <div class="header-meta">
+      <span class="stat-chip">4 files</span>
+      <span class="stat-chip">6 classes</span>
+      <span class="stat-chip">17 functions</span>
+      <span class="stat-chip">25 edges</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="/drill/Architecture">Overview</a>
+    <a href="/drill/Architecture_Core">Core</a>
+    <a href="/drill/Architecture_Enrichment">Enrichment</a>
+    <a href="/drill/Architecture_Ingestion">Ingestion</a>
+    <a href="/drill/Architecture_IO">IO</a>
+    <a href="/drill/Architecture_Pipeline">Pipeline</a>
+    <a href="/drill/Architecture_Roles">Roles</a>
+    <a href="/drill/Architecture_Evaluation_Metrics" class="active">Eval Metrics</a>
+    <a href="/drill/Architecture_Evaluation_Splits">Eval Splits</a>
+    <a href="/drill/Architecture_Evaluation_Stability">Eval Stability</a>
+    <a href="/drill/Architecture_CLI">CLI</a>
+  </nav>
+
+  <input class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
+  <div id="mynetwork"></div>
+
+  <div class="panel" id="panel">
+    <h3>Evaluation: Metrics & Reporting (27 total)</h3>
+    <p style="font-size:11px;color:var(--text-dim);margin-bottom:10px;line-height:1.4">F1, precision, recall, confusion matrices, evaluation results, and structured output dataclasses. Primary gate for Phase 2 acceptance (70% F1).</p>
+    <div id="cluster-list">
+      <div class="cluster-row"><div class="cluster-dot" style="background:#06b6d4"></div><span class="cluster-name">Metrics & Reporting</span></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <h3>Node Types</h3>
+    <div class="legend-item"><div class="legend-shape" style="background:#06b6d4;border-radius:4px"></div> File / Module</div>
+    <div class="legend-item"><div class="legend-shape" style="background:#1e293b;border-radius:50%;border:2px solid #06b6d4"></div> Class</div>
+    <div class="legend-item"><div class="legend-shape" style="background:#0f172a;border:1px solid #475569;transform:rotate(45deg)"></div> Function</div>
+    <div class="legend-item"><div style="width:30px;height:2px;background:#f472b6;border-radius:1px"></div> Cross-module import</div>
+    <div class="legend-item"><div style="width:30px;height:2px;background:#06b6d4;opacity:0.4;border-radius:1px"></div> Contains / defines</div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    var nodes = new vis.DataSet([{"id":183,"label":"evaluation/__init__.py","title":"evaluation/__init__.py\nClasses: 0\nFunctions: 0\n\nPackage init for evaluation module — no-op","color":{"background":"#06b6d4","border":"#06b6d4","highlight":{"background":"#06b6d4","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":16,"y":-13.5,"cluster":"Evaluation"},{"id":184,"label":"evaluation/metrics.py","title":"evaluation/metrics.py\nClasses: 3\nFunctions: 3\n\nComputes F1, precision, recall, confusion matrix for role classification","color":{"background":"#06b6d4","border":"#06b6d4","highlight":{"background":"#06b6d4","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":16,"y":-11.700000000000001,"cluster":"Evaluation"},{"id":185,"label":"PerRoleMetrics","title":"Class: PerRoleMetrics\nMethods: \n\nDataclass holding per-role precision/recall/F1 for each role class","color":{"background":"#1e293b","border":"#06b6d4","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":17.5,"y":-11.700000000000001,"cluster":"Evaluation"},{"id":186,"label":"CalibrationBin","title":"Class: CalibrationBin\nMethods: \n\nBins confidence scores for calibration analysis across role classes","color":{"background":"#1e293b","border":"#06b6d4","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":17.5,"y":-11.700000000000001,"cluster":"Evaluation"},{"id":187,"label":"EvaluationMetrics","title":"Class: EvaluationMetrics\nMethods: \n\nAggregates all evaluation metrics: F1, precision, recall, confusion matrix","color":{"background":"#1e293b","border":"#06b6d4","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":17.5,"y":-11.700000000000001,"cluster":"Evaluation"},{"id":188,"label":"_compute_cm","title":"Function: _compute_cm(labels, predictions, roles)\n\nComputes confusion matrix for role predictions vs ground truth","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-10.8,"cluster":"Evaluation"},{"id":189,"label":"compute_metrics","title":"Function: compute_metrics(evaluation_data)\n\nComputes F1, precision, recall from evaluation data — primary evaluation gate","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-11.4,"cluster":"Evaluation"},{"id":190,"label":"rule_rule_analysis","title":"Function: rule_rule_analysis(evaluation_data)\n\nPerforms per-rule analysis: trigger rates, confusion contributions","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-11.4,"cluster":"Evaluation"},{"id":191,"label":"evaluation/report.py","title":"evaluation/report.py\nClasses: 0\nFunctions: 8\n\nGenerates structured evaluation reports with per-role and aggregate metrics","color":{"background":"#06b6d4","border":"#06b6d4","highlight":{"background":"#06b6d4","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":16,"y":-9.9,"cluster":"Evaluation"},{"id":192,"label":"_role_to_str","title":"Function: _role_to_str(role)\n\nConverts role enum to string for display in reports","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.6,"cluster":"Evaluation"},{"id":193,"label":"_cm_to_dict","title":"Function: _cm_to_dict(cm)\n\nSerializes confusion matrix to dict for JSON report","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.6,"cluster":"Evaluation"},{"id":194,"label":"_per_role_to_dict","title":"Function: _per_role_to_dict(metrics)\n\nSerializes per-role metrics to dict for JSON report","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.6,"cluster":"Evaluation"},{"id":195,"label":"_calibration_to_dict","title":"Function: _calibration_to_dict(calibration)\n\nSerializes calibration data to dict for JSON report","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.6,"cluster":"Evaluation"},{"id":196,"label":"_error_slice","title":"Function: _error_slice(evaluation_data, thresholds)\n\nSlices errors by confidence threshold for error analysis","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.3,"cluster":"Evaluation"},{"id":197,"label":"_trace_summary","title":"Function: _trace_summary(items)\n\nSummarizes decision traces for evaluation report","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.6,"cluster":"Evaluation"},{"id":198,"label":"_rule_trigger_analysis","title":"Function: _rule_trigger_analysis(items)\n\nAnalyzes which rules trigger for which roles in evaluation","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.6,"cluster":"Evaluation"},{"id":199,"label":"generate_eval_report","title":"Function: generate_eval_report(evaluation_data, output_path)\n\nGenerates full evaluation report JSON with metrics, traces, and calibration","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":-9.3,"cluster":"Evaluation"},{"id":339,"label":"evaluation/runner.py","title":"evaluation/runner.py\nClasses: 3\nFunctions: 7\n\nMain evaluation runner: loads dataset, runs evaluation, outputs results","color":{"background":"#06b6d4","border":"#06b6d4","highlight":{"background":"#06b6d4","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":16,"y":11.700000000000001,"cluster":"Evaluation"},{"id":340,"label":"BaselineMetrics","title":"Class: BaselineMetrics\nMethods: \n\nBaseline comparison metrics (random, majority class)","color":{"background":"#1e293b","border":"#06b6d4","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":17.5,"y":11.700000000000001,"cluster":"Evaluation"},{"id":341,"label":"EvaluationSanity","title":"Class: EvaluationSanity\nMethods: \n\nSanity checks for evaluation inputs","color":{"background":"#1e293b","border":"#06b6d4","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":17.5,"y":11.700000000000001,"cluster":"Evaluation"},{"id":342,"label":"EvaluationResult","title":"Class: EvaluationResult\nMethods: \n\nComplete evaluation result with role-wise and aggregate metrics","color":{"background":"#1e293b","border":"#06b6d4","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":17.5,"y":11.700000000000001,"cluster":"Evaluation"},{"id":343,"label":"compute_baselines","title":"Function: compute_baselines(items)\n\nComputes baseline (random, majority) metrics for comparison","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":12.000000000000002,"cluster":"Evaluation"},{"id":344,"label":"check_sanity","title":"Function: check_sanity(items)\n\nRuns sanity checks: null labels, missing predictions, invalid roles","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":12.000000000000002,"cluster":"Evaluation"},{"id":345,"label":"load_labeled_dataset","title":"Function: load_labeled_dataset(path)\n\nLoads ground truth labels from JSON file","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":12.000000000000002,"cluster":"Evaluation"},{"id":346,"label":"load_predictions","title":"Function: load_predictions(path)\n\nLoads model predictions from JSON file","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":12.000000000000002,"cluster":"Evaluation"},{"id":347,"label":"align_and_evaluate","title":"Function: align_and_evaluate(labels, predictions)\n\nAligns labels and predictions by entity ID and computes metrics","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":12.3,"cluster":"Evaluation"},{"id":348,"label":"run_evaluation","title":"Function: run_evaluation(labels_path, predictions_path)\n\nMain evaluation entry point — orchestrates full evaluation pipeline","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":14.5,"y":12.3,"cluster":"Evaluation"}]);
+    var edges = new vis.DataSet([{"from":184,"to":185,"color":{"color":"#06b6d4","opacity":0.4},"arrows":"to"},{"from":184,"to":186,"color":{"color":"#06b6d4","opacity":0.4},"arrows":"to"},{"from":184,"to":187,"color":{"color":"#06b6d4","opacity":0.4},"arrows":"to"},{"from":184,"to":188,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":184,"to":189,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":184,"to":190,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":192,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":193,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":194,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":195,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":196,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":197,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":198,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":191,"to":199,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":339,"to":340,"color":{"color":"#06b6d4","opacity":0.4},"arrows":"to"},{"from":339,"to":341,"color":{"color":"#06b6d4","opacity":0.4},"arrows":"to"},{"from":339,"to":342,"color":{"color":"#06b6d4","opacity":0.4},"arrows":"to"},{"from":339,"to":343,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":339,"to":344,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":339,"to":345,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":339,"to":346,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":339,"to":347,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":339,"to":348,"color":{"color":"#475569","opacity":0.3},"arrows":"to"},{"from":183,"to":184,"color":{"color":"#f472b6","opacity":0.25},"arrows":"to","dashes":true},{"from":183,"to":191,"color":{"color":"#f472b6","opacity":0.25},"arrows":"to","dashes":true}]);
+    var container = document.getElementById('mynetwork');
+    var data = {nodes:nodes, edges:edges};
+    var options = {"physics":{"enabled":true,"barnesHut":{"gravitationalConstant":-3000,"centralGravity":0.3,"springLength":120,"springConstant":0.04,"damping":0.09},"stabilization":{"iterations":150}},"nodes":{"borderWidth":1,"shadow":{"enabled":true,"size":"10px","x":0,"y":4,"color":"rgba(0,0,0,0.4)"}},"edges":{"width":1,"smooth":{"type":"continuous","forceDirection":"none"}},"interaction":{"hover":true,"tooltipDelay":200,"hideEdgesOnDrag":true,"zoomView":true},"layout":{"improvedLayout":true,"hierarchical":{"enabled":false}},"groups":{}};
+    var network = new vis.Network(container,data,options);
+    network.on('stabilizationIterationsDone',function(){network.setOptions({physics:{enabled:false}})});
+    network.on('hoverNode',function(props){
+      var node = nodes.get(props.node);
+      var tooltip = document.getElementById('tooltip');
+      tooltip.innerHTML = node.title.replace(/\n/g,'<br>');
+      tooltip.style.display = 'block';
+      tooltip.style.left = (props.event.offsetX+15) + 'px';
+      tooltip.style.top = (props.event.offsetY+15) + 'px';
+    });
+    network.on('blurNode',function(){document.getElementById('tooltip').style.display='none'});
+    network.on('click',function(props){
+      if(props.nodes.length>0){
+        var node = nodes.get(props.nodes[0]);
+        document.getElementById('search').value = node.label;
+        filterNodes(node.label);
+      }
+    });
+    function filterNodes(term){
+      term=term.toLowerCase();
+      if(!term){nodes.forEach(function(n){nodes.update({id:n.id,opacity:1})});return;}
+      nodes.forEach(function(n){
+        var match = n.label.toLowerCase().includes(term) || (n.title&&n.title.toLowerCase().includes(term));
+        nodes.update({id:n.id,opacity:match?1:0.15,font:{size:match?13:9}});
+      });
+    }
+    network.on('hoverNode',function(props){
+      var node = nodes.get(props.node);
+      if(node&&node.cluster){
+        nodes.forEach(function(n){
+          if(n.cluster===node.cluster){
+            nodes.update({id:n.id,opacity:1});
+          } else if(!document.getElementById('search').value) {
+            nodes.update({id:n.id,opacity:0.6});
+          }
+        });
+      }
+    });
+  </script>
+</Layout>
+
+<style>
+  :root{--primary:#06b6d4;--bg-dark:#0f172a;--bg-card:rgba(30,41,59,0.7);--border:rgba(255,255,255,0.1);--text-main:#f8fafc;--text-dim:#94a3b8;--accent:#818cf8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Outfit',sans-serif;background-color:var(--bg-dark);background-image:radial-gradient(at 0% 0%, rgba(99,102,241,0.15) 0px, transparent 50%),radial-gradient(at 100% 100%, rgba(129,140,248,0.1) 0px, transparent 50%);color:var(--text-main);overflow:hidden;height:100vh}
+  .header{position:fixed;top:20px;left:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 24px;border-radius:16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .header h1{font-size:16px;font-weight:600;background:linear-gradient(135deg,#06b6d4,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .header-meta{display:flex;gap:16px;font-size:12px;color:var(--text-dim)}
+  .stat-chip{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:4px 10px;border-radius:20px;font-size:11px}
+  .breadcrumb{font-size:12px;color:var(--text-dim);margin-left:16px}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--text-main)}
+  #mynetwork{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1}
+  .panel{position:fixed;bottom:20px;left:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border);max-width:320px;max-height:300px;overflow-y:auto}
+  .panel h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+  .cluster-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+  .cluster-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .cluster-name{flex:1;font-weight:500}
+  .cluster-stats{color:var(--text-dim);font-size:11px;font-family:'JetBrains Mono',monospace}
+  .legend{position:fixed;bottom:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border)}
+  .legend h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+  .legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+  .legend-shape{width:14px;height:14px;border-radius:3px}
+  .tooltip{position:absolute;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;pointer-events:none;z-index:2000;max-width:300px;display:none}
+  .tooltip b{color:var(--accent)}
+  .search{position:fixed;top:20px;right:300px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--text-main);outline:none;width:200px}
+  .search:focus{border-color:var(--primary)}
+  .nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:4px;background:var(--bg-card);backdrop-filter:blur(12px);padding:6px 12px;border-radius:12px;border:1px solid var(--border);font-size:11px}
+  .nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
+  .nav a:hover{background:rgba(255,255,255,0.1);color:var(--text-main)}
+  .nav a.active{background:#06b6d4;color:white}
+</style>

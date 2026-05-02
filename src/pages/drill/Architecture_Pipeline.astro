@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="Architecture: Pipeline - Sthenos">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
   <nav>
     <a href="/">Sthenos</a>
     <a href="/dashboard">Dashboard</a>
@@ -10,184 +15,163 @@ import Layout from '../../layouts/Layout.astro';
     <a href="/drill/Architecture">Architecture</a>
   </nav>
 
-  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80');">
-    <div class="content">
-      <p class="label">Architecture → Pipeline</p>
+  <div class="header">
+    <div style="display:flex;align-items:center">
       <h1>Pipeline</h1>
-      <p>Diagnostic runner and pipeline orchestration — coordinates the enrichment flow.</p>
-      <div class="stat-chips">
-        <span>9 files</span>
-        <span>0 classes</span>
-        <span>7 functions</span>
-        <span>7 edges</span>
-      </div>
+      <span class="breadcrumb">Architecture → <a href="/drill/Architecture">Pipeline</a></span>
     </div>
-  </section>
+    <div class="header-meta">
+      <span class="stat-chip">9 files</span>
+      <span class="stat-chip">0 classes</span>
+      <span class="stat-chip">7 functions</span>
+      <span class="stat-chip">7 edges</span>
+    </div>
+  </div>
 
-  <section class="content-section">
-    <div class="component-list">
-      <h2>Pipeline Components (9)</h2>
-      <div class="component-grid">
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">compute_match_summary</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">load_caldera_breadcrumbs</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">main</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">pipeline/__init__.py</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">pipeline/runner.py</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">plot_behavior_timeseries</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">plot_diagnostics</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">run_diagnostics</span>
-        </div>
-        <div class="component-item">
-          <span class="component-dot" style="background: #8b5cf6"></span>
-          <span class="component-name">run_pipeline</span>
-        </div>
-      </div>
-    </div>
+  <nav class="nav">
+    <a href="/drill/Architecture">Overview</a>
+    <a href="/drill/Architecture_Core">Core</a>
+    <a href="/drill/Architecture_Enrichment">Enrichment</a>
+    <a href="/drill/Architecture_Ingestion">Ingestion</a>
+    <a href="/drill/Architecture_IO">IO</a>
+    <a href="/drill/Architecture_Pipeline" class="active">Pipeline</a>
+    <a href="/drill/Architecture_Roles">Roles</a>
+    <a href="/drill/Architecture_Evaluation_Metrics">Eval Metrics</a>
+    <a href="/drill/Architecture_Evaluation_Splits">Eval Splits</a>
+    <a href="/drill/Architecture_Evaluation_Stability">Eval Stability</a>
+    <a href="/drill/Architecture_CLI">CLI</a>
+  </nav>
 
-    <div class="legend" style="margin-top: 48px;">
-      <h3>Node Types</h3>
-      <div class="legend-item">
-        <div class="legend-shape" style="background: #8b5cf6; border-radius: 4px;"></div>
-        <span>File / Module</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-shape" style="background: #1e293b; border-radius: 50%; border: 2px solid #8b5cf6;"></div>
-        <span>Class</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-shape" style="background: #0f172a; border: 1px solid #475569; transform: rotate(45deg);"></div>
-        <span>Function</span>
-      </div>
+  <input class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
+  <div id="mynetwork"></div>
+
+  <div class="panel" id="panel">
+    <h3>Pipeline Components (9)</h3>
+    <div id="cluster-list">
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">compute_match_summary</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">load_caldera_breadcrumbs</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">main</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">pipeline/__init__.py</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">pipeline/runner.py</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">plot_behavior_timeseries</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">plot_diagnostics</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">run_diagnostics</span></div>
+      <div class="cluster-row"><div class="cluster-dot" style="background:#8b5cf6"></div><span class="cluster-name">run_pipeline</span></div>
     </div>
-  </section>
+  </div>
+
+  <div class="legend">
+    <h3>Node Types</h3>
+    <div class="legend-item"><div class="legend-shape" style="background:#8b5cf6;border-radius:4px"></div> File / Module</div>
+    <div class="legend-item"><div class="legend-shape" style="background:#1e293b;border-radius:50%;border:2px solid #8b5cf6"></div> Class</div>
+    <div class="legend-item"><div class="legend-shape" style="background:#0f172a;border:1px solid #475569;transform:rotate(45deg)"></div> Function</div>
+    <div class="legend-item"><div style="width:30px;height:2px;background:#f472b6;border-radius:1px"></div> Cross-module import</div>
+    <div class="legend-item"><div style="width:30px;height:2px;background:#8b5cf6;opacity:0.4;border-radius:1px"></div> Contains / defines</div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    var nodes = new vis.DataSet([
+      {"id":143,"label":"pipeline/__init__.py","title":"pipeline/__init__.py\nClasses: 0\nFunctions: 0\n\npipeline/__init__.py","color":{"background":"#8b5cf6","border":"#8b5cf6","highlight":{"background":"#8b5cf6","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":12,"y":-1.8,"cluster":"Pipeline"},
+      {"id":144,"label":"pipeline/runner.py","title":"pipeline/runner.py\nClasses: 0\nFunctions: 7\n\nPipeline runner: orchestrates full pipeline from USD to WISDOM JSON","color":{"background":"#8b5cf6","border":"#8b5cf6","highlight":{"background":"#8b5cf6","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":12,"y":0.0,"cluster":"Pipeline"},
+      {"id":145,"label":"load_caldera_breadcrumbs","title":"Function: load_caldera_breadcrumbs(match_index, viz)\n\nLoads Caldera breadcrumbs from USD stage","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":10.5,"y":0.6,"cluster":"Pipeline"},
+      {"id":146,"label":"run_diagnostics","title":"Function: run_diagnostics(match_index)\n\nRuns diagnostic checks on loaded data","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":10.5,"y":0.3,"cluster":"Pipeline"},
+      {"id":147,"label":"run_pipeline","title":"Function: run_pipeline(match_index, viz)\n\nRuns full enrichment pipeline on match data","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":10.5,"y":0.6,"cluster":"Pipeline"},
+      {"id":148,"label":"compute_match_summary","title":"Function: compute_match_summary(results)\n\n\nComputes match-level summary statistics","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":10.5,"y":0.3,"cluster":"Pipeline"},
+      {"id":149,"label":"plot_diagnostics","title":"Function: plot_diagnostics(summary, output_dir)\n\nPlots diagnostic visualizations","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":10.5,"y":0.6,"cluster":"Pipeline"},
+      {"id":150,"label":"plot_behavior_timeseries","title":"Function: plot_behavior_timeseries(entities, output_dir)\n\nPlots per-entity behavior over time","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":10.5,"y":0.6,"cluster":"Pipeline"}
+    ]);
+    var edges = new vis.DataSet([
+      {"from": 144, "to": 145, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"},
+      {"from": 144, "to": 146, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"},
+      {"from": 144, "to": 147, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"},
+      {"from": 144, "to": 148, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"},
+      {"from": 144, "to": 149, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"},
+      {"from": 144, "to": 150, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"},
+      {"from": 144, "to": 151, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}
+    ]);
+    var container = document.getElementById('mynetwork');
+    var data = {nodes:nodes, edges:edges};
+    var options = {
+      physics:{enabled:true,barnesHut:{gravitationalConstant:-3000,centralGravity:0.3,springLength:120,springConstant:0.04,damping:0.09},stabilization:{iterations:150}},
+      nodes:{borderWidth:1,shadow:{enabled:true,size:'10px',x:0,y:4,color:'rgba(0,0,0,0.4)'}},
+      edges:{width:1,smooth:{type:'continuous',forceDirection:'none'}},
+      interaction:{hover:true,tooltipDelay:200,hideEdgesOnDrag:true,zoomView:true},
+      layout:{improvedLayout:true,hierarchical:{enabled:false}},
+      groups:{}
+    };
+    var network = new vis.Network(container,data,options);
+    network.on('stabilizationIterationsDone',function(){network.setOptions({physics:{enabled:false}})});
+    network.on('hoverNode',function(props){
+      var node = nodes.get(props.node);
+      var tooltip = document.getElementById('tooltip');
+      tooltip.innerHTML = node.title.replace(/\n/g,'<br>');
+      tooltip.style.display = 'block';
+      tooltip.style.left = (props.event.offsetX+15) + 'px';
+      tooltip.style.top = (props.event.offsetY+15) + 'px';
+    });
+    network.on('blurNode',function(){document.getElementById('tooltip').style.display='none'});
+    network.on('click',function(props){
+      if(props.nodes.length>0){
+        var node = nodes.get(props.nodes[0]);
+        document.getElementById('search').value = node.label;
+        filterNodes(node.label);
+      }
+    });
+    function filterNodes(term){
+      term=term.toLowerCase();
+      if(!term){nodes.updateAll().forEach(function(n){n.opacity=1});return;}
+      nodes.forEach(function(n){
+        var match = n.label.toLowerCase().includes(term) || (n.title&&n.title.toLowerCase().includes(term));
+        nodes.update({id:n.id,opacity:match?1:0.15,font:{size:match?13:9}});
+      });
+    }
+    network.on('hoverNode',function(props){
+      var node = nodes.get(props.node);
+      if(node&&node.cluster){
+        nodes.forEach(function(n){
+          if(n.cluster===node.cluster){
+            nodes.update({id:n.id,opacity:1});
+          } else if(!document.getElementById('search').value) {
+            nodes.update({id:n.id,opacity:0.6});
+          }
+        });
+      }
+    });
+  </script>
 </Layout>
 
 <style>
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    gap: 24px;
-    padding: 24px 5%;
-    z-index: 100;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
-  }
-
-  nav a {
-    text-transform: uppercase;
-    letter-spacing: 1.17px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .content-section {
-    background: var(--space-black);
-    padding: 80px 5%;
-  }
-
-  .stat-chips {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-
-  .stat-chips span {
-    padding: 6px 12px;
-    background: rgba(139, 92, 246, 0.15);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: 20px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .component-list h2 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-    margin-bottom: 24px;
-  }
-
-  .component-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-  }
-
-  .component-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: var(--ghost-surface);
-    border: 1px solid var(--ghost-border);
-    border-radius: 8px;
-  }
-
-  .component-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .component-name {
-    font-size: 13px;
-    font-family: 'D-DIN', monospace;
-  }
-
-  .legend h3 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-    margin-bottom: 16px;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-    font-size: 12px;
-  }
-
-  .legend-shape {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 768px) {
-    nav { gap: 16px; flex-wrap: wrap; }
-    nav a { font-size: 10px; }
-    .component-grid { grid-template-columns: 1fr; }
-  }
+  :root{--primary:#8b5cf6;--bg-dark:#0f172a;--bg-card:rgba(30,41,59,0.7);--border:rgba(255,255,255,0.1);--text-main:#f8fafc;--text-dim:#94a3b8;--accent:#818cf8}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Outfit',sans-serif;background-color:var(--bg-dark);background-image:radial-gradient(at 0% 0%, rgba(99,102,241,0.15) 0px, transparent 50%),radial-gradient(at 100% 100%, rgba(129,140,248,0.1) 0px, transparent 50%);color:var(--text-main);overflow:hidden;height:100vh}
+  .header{position:fixed;top:20px;left:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 24px;border-radius:16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .header h1{font-size:16px;font-weight:600;background:linear-gradient(135deg,#8b5cf6,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .header-meta{display:flex;gap:16px;font-size:12px;color:var(--text-dim)}
+  .stat-chip{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:4px 10px;border-radius:20px;font-size:11px}
+  .breadcrumb{font-size:12px;color:var(--text-dim);margin-left:16px}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--text-main)}
+  #mynetwork{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1}
+  .panel{position:fixed;bottom:20px;left:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border);max-width:320px;max-height:300px;overflow-y:auto}
+  .panel h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+  .cluster-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+  .cluster-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .cluster-name{flex:1;font-weight:500}
+  .cluster-stats{color:var(--text-dim);font-size:11px;font-family:'JetBrains Mono',monospace}
+  .legend{position:fixed;bottom:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border)}
+  .legend h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+  .legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+  .legend-shape{width:14px;height:14px;border-radius:3px}
+  .tooltip{position:absolute;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;pointer-events:none;z-index:2000;max-width:300px;display:none}
+  .tooltip b{color:var(--accent)}
+  .search{position:fixed;top:20px;right:300px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--text-main);outline:none;width:200px}
+  .search:focus{border-color:var(--primary)}
+  .nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:4px;background:var(--bg-card);backdrop-filter:blur(12px);padding:6px 12px;border-radius:12px;border:1px solid var(--border);font-size:11px}
+  .nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
+  .nav a:hover{background:rgba(255,255,255,0.1);color:var(--text-main)}
+  .nav a.active{background:#8b5cf6;color:white}
+  nav{position:fixed;top:0;left:0;right:0;display:flex;gap:24px;padding:24px 5%;z-index:100;background:linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)}
+  nav a{text-transform:uppercase;letter-spacing:1.17px;font-size:11px;font-weight:700}
 </style>
