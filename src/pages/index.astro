@@ -15,8 +15,8 @@ async function hashPassword(password: string): Promise<string> {
 const form = document.getElementById('loginForm');
 const errorMsg = document.getElementById('errorMsg');
 
-// Demo hash - change ADMIN_HASH in Vercel env vars to your SHA-256 hashed password
-const adminHash = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'; // demo123
+// SHA-256 hash of "demo123"
+const adminHash = 'd3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
