@@ -24,15 +24,15 @@ import Layout from '../../layouts/Layout.astro';
   <nav class="nav">
     <a href="/drill/Architecture">Overview</a>
     <a href="/drill/Architecture_Core">Core</a>
-    <a href="/drill/Architecture_Enrichment">Enrichment</a>
-    <a href="/drill/Architecture_Ingestion">Ingestion</a>
-    <a href="/drill/Architecture_IO">IO</a>
+    <a href="/drill/Architecture_Enrichment" class="locked">Enrichment</a>
+    <a href="/drill/Architecture_Ingestion" class="locked">Ingestion</a>
+    <a href="/drill/Architecture_IO" class="locked">IO</a>
     <a href="/drill/Architecture_Pipeline">Pipeline</a>
     <a href="/drill/Architecture_Roles" class="active">Roles</a>
-    <a href="/drill/Architecture_Evaluation_Metrics">Eval Metrics</a>
-    <a href="/drill/Architecture_Evaluation_Splits">Eval Splits</a>
-    <a href="/drill/Architecture_Evaluation_Stability">Eval Stability</a>
-    <a href="/drill/Architecture_CLI">CLI</a>
+    <a href="/drill/Architecture_Evaluation_Metrics" class="locked">Eval Metrics</a>
+    <a href="/drill/Architecture_Evaluation_Splits" class="locked">Eval Splits</a>
+    <a href="/drill/Architecture_Evaluation_Stability" class="locked">Eval Stability</a>
+    <a href="/drill/Architecture_CLI" class="locked">CLI</a>
   </nav>
 
   <input class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
@@ -143,4 +143,5 @@ import Layout from '../../layouts/Layout.astro';
   .nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
   .nav a:hover{background:rgba(255,255,255,0.1);color:var(--text-main)}
   .nav a.active{background:#ec4899;color:white}
+  .nav a.locked{opacity:0.4;cursor:not-allowed;pointer-events:none}
 </style>

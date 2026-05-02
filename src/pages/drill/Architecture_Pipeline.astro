@@ -31,15 +31,15 @@ import Layout from '../../layouts/Layout.astro';
   <nav class="nav">
     <a href="/drill/Architecture">Overview</a>
     <a href="/drill/Architecture_Core">Core</a>
-    <a href="/drill/Architecture_Enrichment">Enrichment</a>
-    <a href="/drill/Architecture_Ingestion">Ingestion</a>
-    <a href="/drill/Architecture_IO">IO</a>
+    <a href="/drill/Architecture_Enrichment" class="locked">Enrichment</a>
+    <a href="/drill/Architecture_Ingestion" class="locked">Ingestion</a>
+    <a href="/drill/Architecture_IO" class="locked">IO</a>
     <a href="/drill/Architecture_Pipeline" class="active">Pipeline</a>
-    <a href="/drill/Architecture_Roles">Roles</a>
-    <a href="/drill/Architecture_Evaluation_Metrics">Eval Metrics</a>
-    <a href="/drill/Architecture_Evaluation_Splits">Eval Splits</a>
-    <a href="/drill/Architecture_Evaluation_Stability">Eval Stability</a>
-    <a href="/drill/Architecture_CLI">CLI</a>
+    <a href="/drill/Architecture_Roles" class="locked">Roles</a>
+    <a href="/drill/Architecture_Evaluation_Metrics" class="locked">Eval Metrics</a>
+    <a href="/drill/Architecture_Evaluation_Splits" class="locked">Eval Splits</a>
+    <a href="/drill/Architecture_Evaluation_Stability" class="locked">Eval Stability</a>
+    <a href="/drill/Architecture_CLI" class="locked">CLI</a>
   </nav>
 
   <input class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
@@ -172,6 +172,7 @@ import Layout from '../../layouts/Layout.astro';
   .nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
   .nav a:hover{background:rgba(255,255,255,0.1);color:var(--text-main)}
   .nav a.active{background:#8b5cf6;color:white}
+  .nav a.locked{opacity:0.4;cursor:not-allowed;pointer-events:none}
   nav{position:fixed;top:0;left:0;right:0;display:flex;gap:24px;padding:24px 5%;z-index:100;background:linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)}
   nav a{text-transform:uppercase;letter-spacing:1.17px;font-size:11px;font-weight:700}
 </style>
