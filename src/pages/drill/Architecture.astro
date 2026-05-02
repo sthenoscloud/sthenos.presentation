@@ -1,0 +1,171 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Architecture Overview - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/drill">Drill</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Architecture Overview</p>
+      <h1>7-Layer Defense AI Platform</h1>
+      <p>The complete architecture spans seven distinct layers, from raw inputs to strategic AI simulation.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="layer-list">
+      <div class="layer-item">
+        <span class="layer-num">L1</span>
+        <span>Raw Inputs (Caldera / Sensors / IoT / Edge)</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">L2</span>
+        <span>Data Normalization (USD / JSON / Streams)</span>
+      </div>
+      <div class="layer-item core">
+        <span class="layer-num">L3</span>
+        <span>Semantic Enrichment Layer — Core MVP</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">L4</span>
+        <span>Behavioral & Tactical Modeling</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">L5</span>
+        <span>Synthetic Data Generation Engine</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">L6</span>
+        <span>Decision Support & Scenario Evaluation</span>
+      </div>
+      <div class="layer-item">
+        <span class="layer-num">L7</span>
+        <span>Strategic AI / Multi-agent Simulation</span>
+      </div>
+    </div>
+
+    <div class="module-section" style="margin-top: 64px;">
+      <h2>Component Modules</h2>
+      <div class="module-grid">
+        <span class="module-tag" style="border-color: #6366f1;">Core</span>
+        <span class="module-tag" style="border-color: #10b981;">Enrichment</span>
+        <span class="module-tag" style="border-color: #f59e0b;">Ingestion</span>
+        <span class="module-tag" style="border-color: #ef4444;">IO</span>
+        <span class="module-tag" style="border-color: #8b5cf6;">Pipeline</span>
+        <span class="module-tag" style="border-color: #ec4899;">Roles</span>
+      </div>
+    </div>
+
+    <div class="differentiators" style="margin-top: 64px;">
+      <h2>Key Differentiators</h2>
+      <ul class="feature-list">
+        <li>Terrain-aware reasoning (canonical world frame)</li>
+        <li>Dual-path inference (static + streaming)</li>
+        <li>Causal evaluation layer (D-effector)</li>
+        <li>Air-gap operable (no external network calls)</li>
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .content-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(240, 240, 250, 0.1);
+  }
+
+  .layer-item.core {
+    border: 1px solid var(--ghost-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  .layer-num {
+    font-size: 10px;
+    font-weight: 700;
+    opacity: 0.5;
+    min-width: 24px;
+  }
+
+  .layer-item span:last-child {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    opacity: 0.6;
+  }
+
+  .module-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .module-tag {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .feature-list {
+    list-style: none;
+  }
+
+  .feature-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(240, 240, 250, 0.1);
+    font-size: 14px;
+  }
+
+  .feature-list li:last-child {
+    border-bottom: none;
+  }
+</style>

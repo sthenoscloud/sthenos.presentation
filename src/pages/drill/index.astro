@@ -2,25 +2,28 @@
 import Layout from '../../layouts/Layout.astro';
 
 const pages = [
-  { name: '01_capabilities', title: 'System Capabilities', desc: 'The six core capabilities that transform raw data into strategic intelligence' },
-  { name: '02_value_flow', title: 'Value Flow', desc: 'How raw data transforms into strategic advantage' },
-  { name: '03_failure_modes', title: 'Failure Modes & Risk', desc: 'Critical vulnerabilities that could compromise system reliability' },
-  { name: '04_differentiation', title: 'Competitive Differentiation', desc: 'The defensible technical advantages that create strategic value' },
-  { name: '05_system_dynamics', title: 'System Dynamics', desc: 'Temporal behavior, feedback loops, and stability characteristics' },
-  { name: '06_operational_scenarios', title: 'Operational Scenarios', desc: 'Real-world deployment constraints and system responses' },
-  { name: 'Architecture', title: 'Architecture Overview', desc: '7-Layer Defense AI Platform overview' },
-  { name: 'Architecture_Core', title: 'Architecture - Core', desc: 'Core entity, team, and capability models' },
-  { name: 'Architecture_Enrichment', title: 'Architecture - Enrichment', desc: 'Feature extraction, normalization, and behavioral inference' },
-  { name: 'Architecture_Ingestion', title: 'Architecture - Ingestion', desc: 'USD loading and breadcrumbs parsing' },
-  { name: 'Architecture_IO', title: 'Architecture - IO', desc: 'World state adapter and diagnostics' },
-  { name: 'Architecture_Pipeline', title: 'Architecture - Pipeline', desc: 'Diagnostic runner and pipeline orchestration' },
-  { name: 'Architecture_Roles', title: 'Architecture - Roles', desc: 'Rule evaluation, score aggregation, and role classification' },
-  { name: 'Architecture_Evaluation', title: 'Architecture - Evaluation', desc: 'Synthetic validation and adapter diagnostics' },
-  { name: 'Architecture_Evaluation_Metrics', title: 'Architecture - Eval Metrics', desc: 'Evaluation metrics and testing' },
-  { name: 'Architecture_Evaluation_Splits', title: 'Architecture - Eval Splits', desc: 'Evaluation split analysis' },
-  { name: 'Architecture_Evaluation_Stability', title: 'Architecture - Eval Stability', desc: 'Stability analysis across temporal splits' },
-  { name: 'Architecture_CLI', title: 'Architecture - CLI', desc: 'Command-line interface' },
+  { name: '01_capabilities', title: 'System Capabilities', desc: 'The six core capabilities that transform raw data into strategic intelligence', available: true },
+  { name: '02_value_flow', title: 'Value Flow', desc: 'How raw data transforms into strategic advantage', available: true },
+  { name: '03_failure_modes', title: 'Failure Modes & Risk', desc: 'Critical vulnerabilities that could compromise system reliability', available: true },
+  { name: '04_differentiation', title: 'Competitive Differentiation', desc: 'The defensible technical advantages that create strategic value', available: true },
+  { name: '05_system_dynamics', title: 'System Dynamics', desc: 'Temporal behavior, feedback loops, and stability characteristics', available: true },
+  { name: '06_operational_scenarios', title: 'Operational Scenarios', desc: 'Real-world deployment constraints and system responses', available: true },
+  { name: 'Architecture', title: 'Architecture Overview', desc: '7-Layer Defense AI Platform overview', available: true },
+  { name: 'Architecture_Core', title: 'Architecture - Core', desc: 'Core entity, team, and capability models', available: false },
+  { name: 'Architecture_Enrichment', title: 'Architecture - Enrichment', desc: 'Feature extraction, normalization, and behavioral inference', available: false },
+  { name: 'Architecture_Ingestion', title: 'Architecture - Ingestion', desc: 'USD loading and breadcrumbs parsing', available: false },
+  { name: 'Architecture_IO', title: 'Architecture - IO', desc: 'World state adapter and diagnostics', available: false },
+  { name: 'Architecture_Pipeline', title: 'Architecture - Pipeline', desc: 'Diagnostic runner and pipeline orchestration', available: false },
+  { name: 'Architecture_Roles', title: 'Architecture - Roles', desc: 'Rule evaluation, score aggregation, and role classification', available: false },
+  { name: 'Architecture_Evaluation', title: 'Architecture - Evaluation', desc: 'Synthetic validation and adapter diagnostics', available: false },
+  { name: 'Architecture_Evaluation_Metrics', title: 'Architecture - Eval Metrics', desc: 'Evaluation metrics and testing', available: false },
+  { name: 'Architecture_Evaluation_Splits', title: 'Architecture - Eval Splits', desc: 'Evaluation split analysis', available: false },
+  { name: 'Architecture_Evaluation_Stability', title: 'Architecture - Eval Stability', desc: 'Stability analysis across temporal splits', available: false },
+  { name: 'Architecture_CLI', title: 'Architecture - CLI', desc: 'Command-line interface', available: false },
 ];
+
+const availablePages = pages.filter(p => p.available);
+const unavailablePages = pages.filter(p => !p.available);
 ---
 
 <Layout title="Architecture Drill - Sthenos">
@@ -51,7 +54,7 @@ const pages = [
     <div class="content">
       <h2>Core Sections</h2>
       <div class="page-grid">
-        {pages.slice(0, 6).map(page => (
+        {availablePages.map(page => (
           <a href={`/drill/${page.name}`} class="page-card">
             <h3>{page.title}</h3>
             <p>{page.desc}</p>
@@ -61,11 +64,12 @@ const pages = [
 
       <h2 style="margin-top: 64px;">Architecture Modules</h2>
       <div class="page-grid">
-        {pages.slice(6).map(page => (
-          <a href={`/drill/${page.name}`} class="page-card">
+        {unavailablePages.map(page => (
+          <div class="page-card disabled">
             <h3>{page.title}</h3>
             <p>{page.desc}</p>
-          </a>
+            <span class="coming-soon">Coming Soon</span>
+          </div>
         ))}
       </div>
     </div>
@@ -138,6 +142,29 @@ const pages = [
     font-size: 13px;
     opacity: 0.6;
     line-height: 1.5;
+  }
+
+  .page-card.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .page-card.disabled h3,
+  .page-card.disabled p {
+    opacity: 0.5;
+  }
+
+  .coming-soon {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 12px;
+    background: rgba(240, 240, 250, 0.1);
+    border: 1px solid rgba(240, 240, 250, 0.2);
+    border-radius: 20px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
   }
 
   @media (max-width: 900px) {
