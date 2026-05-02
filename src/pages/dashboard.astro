@@ -2,825 +2,637 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Dashboard - Platform Demonstration">
-  <div class="dashboard">
-    <header class="header">
-      <div class="header-left">
-        <svg width="32" height="32" viewBox="0 0 32 32">
-          <rect width="32" height="32" rx="6" fill="#1e293b"/>
-          <text x="16" y="22" text-anchor="middle" fill="#6366f1" font-size="18" font-weight="700">S</text>
-        </svg>
-        <div class="header-title">
-          <h1>Platform Demonstration</h1>
-          <span class="classification">UNCLASSIFIED // FOR DEMONSTRATION ONLY</span>
+<Layout title="Dashboard - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#scenarios">Scenarios</a>
+    <a href="#dynamics">Dynamics</a>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Platform Dashboard</p>
+      <h1>Observe → Understand → Anticipate</h1>
+      <p>A three-layer behavioral early-warning system. Not tracking. Not anomaly detection. Regime-aware inference.</p>
+      <div class="stats">
+        <div>
+          <div class="stat-value">118</div>
+          <div class="stat-label">Entities Processed</div>
+        </div>
+        <div>
+          <div class="stat-value">398</div>
+          <div class="stat-label">Timesteps Analyzed</div>
+        </div>
+        <div>
+          <div class="stat-value">46K+</div>
+          <div class="stat-label">Entity-Tick Observations</div>
+        </div>
+        <div>
+          <div class="stat-value">0.998</div>
+          <div class="stat-label">Signal Confidence</div>
         </div>
       </div>
-      <div class="header-right">
-        <span class="user-badge">demo</span>
-        <a href="/" class="btn-logout">Sign Out</a>
-      </div>
-    </header>
-
-    <div class="notice">
-      <p>
-        <strong>Note:</strong> This page is for demonstration purposes only — to present the capabilities
-        of our AI-powered operational intelligence platform. Not a product, not affiliated with Sthenos AI
-        or any subsidiaries. All information displayed is for presentation review only.
-      </p>
     </div>
+  </section>
 
-    <nav class="nav-tabs">
-      <button class="tab active" data-tab="capabilities">Capabilities Overview</button>
-      <button class="tab" data-tab="architecture">Architecture</button>
-      <button class="tab" data-tab="operational">Operational Scenarios</button>
-      <button class="tab" data-tab="dynamics">System Dynamics</button>
-    </nav>
+  <!-- CAPABILITIES SECTION -->
+  <section id="capabilities" class="section" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Core Capabilities</p>
+      <h2>The Platform</h2>
+      <p>sthenos.cloud transforms incomplete operational datasets (raw movement traces, geometry) into actionable simulation environments for defense AI. The L3 MVP core produces WISDOM-aligned JSON with decision traces.</p>
 
-    <main class="content">
-      <!-- CAPABILITIES TAB -->
-      <section id="capabilities" class="tab-content active">
-        <h2>Observe → Understand → Anticipate</h2>
-        <p class="section-desc">A three-layer behavioral early-warning system. Not tracking. Not anomaly detection. <strong>Regime-aware inference.</strong></p>
-
-        <div class="capability-grid">
-          <div class="cap-card">
-            <div class="cap-num">1</div>
-            <h3>OBSERVE</h3>
-            <p class="cap-sub">Raw movement → Operational interaction picture</p>
-            <ul>
-              <li>Multi-agent trajectories</li>
-              <li>Spatial relationships</li>
-              <li>Who moved toward whom</li>
-              <li>Temporal evolution</li>
-            </ul>
-            <div class="quote">
-              "Transforms dispersed movement into an evolving interaction picture exposing relationships invisible in raw tracks."
-            </div>
-          </div>
-
-          <div class="cap-card highlight">
-            <div class="cap-num blue">2</div>
-            <h3 class="blue-text">UNDERSTAND</h3>
-            <p class="cap-sub">Behavioral intelligence — the differentiator</p>
-            <ul>
-              <li><strong>Coordination indicators</strong> — graph connectivity shifts, interaction persistence</li>
-              <li><strong>Instability indicators</strong> — spectral gap changes, topology reorganization</li>
-              <li><strong>Role inference</strong> — scout / attacker / defender behavioral signatures</li>
-              <li><strong>Pressure distribution</strong> — density, threat, escape fractions</li>
-            </ul>
-            <div class="quote blue-border">
-              "Detects whether actors are becoming coordinated, fragmented, or unstable — before the event is visible."
-            </div>
-          </div>
-
-          <div class="cap-card">
-            <div class="cap-num">3</div>
-            <h3>ANTICIPATE</h3>
-            <p class="cap-sub">Regime transition detection — early warning</p>
-            <ul>
-              <li><strong>Stability assessment</strong> — is the system staying in regime?</li>
-              <li><strong>Transition detection</strong> — regime shift alerts</li>
-              <li><strong>Escalation precursors</strong> — behavioral indicators of coordination risk</li>
-              <li><strong>Decision support cues</strong> — compressed summary for analysts</li>
-            </ul>
-            <div class="quote">
-              "Estimates when the environment is transitioning toward coordination, escalation, or reorganization."
-            </div>
+      <div class="grid">
+        <div>
+          <h3>1. Observe</h3>
+          <p>Raw movement → Operational interaction picture. Multi-agent trajectories, spatial relationships, temporal evolution.</p>
+        </div>
+        <div>
+          <h3>2. Understand</h3>
+          <p>Behavioral intelligence. Coordination indicators, instability indicators, role inference (scout/attacker/defender), pressure distribution.</p>
+        </div>
+        <div>
+          <h3>3. Anticipate</h3>
+          <p>Regime transition detection. Stability assessment, transition detection, escalation precursors, decision support cues.</p>
+        </div>
+        <div>
+          <h3>Pipeline</h3>
+          <div class="pipeline">
+            <span class="pipeline-stage">Ingest</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-stage">Enrich</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-stage">Infer</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-stage">Classify</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-stage">Signal</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="metrics-row">
-          <div class="metric">
-            <div class="metric-value">118</div>
-            <div class="metric-label">Entities Processed</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">398</div>
-            <div class="metric-label">Timesteps Analyzed</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">46K+</div>
-            <div class="metric-label">Entity-Tick Observations</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">0.998</div>
-            <div class="metric-label">Signal Confidence</div>
+  <!-- ARCHITECTURE SECTION -->
+  <section id="architecture" class="section" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">System Architecture</p>
+      <h2>7-Layer Defense AI Platform</h2>
+
+      <div class="layer-list">
+        <div class="layer-item">
+          <span class="layer-num">L1</span>
+          <span>Raw Inputs (Caldera / Sensors / IoT / Edge)</span>
+        </div>
+        <div class="layer-item">
+          <span class="layer-num">L2</span>
+          <span>Data Normalization (USD / JSON / Streams)</span>
+        </div>
+        <div class="layer-item core">
+          <span class="layer-num">L3</span>
+          <span>Semantic Enrichment Layer — Core MVP</span>
+        </div>
+        <div class="layer-item">
+          <span class="layer-num">L4</span>
+          <span>Behavioral & Tactical Modeling</span>
+        </div>
+        <div class="layer-item">
+          <span class="layer-num">L5</span>
+          <span>Synthetic Data Generation Engine</span>
+        </div>
+        <div class="layer-item">
+          <span class="layer-num">L6</span>
+          <span>Decision Support & Scenario Evaluation</span>
+        </div>
+        <div class="layer-item">
+          <span class="layer-num">L7</span>
+          <span>Strategic AI / Multi-agent Simulation</span>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 64px;">
+        <div>
+          <h3>Component Modules</h3>
+          <div class="module-grid">
+            <span class="module-tag" style="border-color: #6366f1;">Core</span>
+            <span class="module-tag" style="border-color: #10b981;">Enrichment</span>
+            <span class="module-tag" style="border-color: #f59e0b;">Ingestion</span>
+            <span class="module-tag" style="border-color: #ef4444;">IO</span>
+            <span class="module-tag" style="border-color: #8b5cf6;">Pipeline</span>
+            <span class="module-tag" style="border-color: #ec4899;">Roles</span>
           </div>
         </div>
-      </section>
-
-      <!-- ARCHITECTURE TAB -->
-      <section id="architecture" class="tab-content">
-        <h2>7-Layer Defense AI Platform</h2>
-        <p class="section-desc">Architecture designed for semantic enrichment and behavioral inference.</p>
-
-        <div class="arch-layers">
-          <div class="layer"><span class="layer-badge">L7</span> Strategic AI / Multi-agent Simulation</div>
-          <div class="layer"><span class="layer-badge">L6</span> Decision Support & Scenario Evaluation</div>
-          <div class="layer"><span class="layer-badge">L5</span> Synthetic Data Generation Engine</div>
-          <div class="layer"><span class="layer-badge">L4</span> Behavioral & Tactical Modeling</div>
-          <div class="layer core"><span class="layer-badge core">L3</span> <strong>Semantic Enrichment Layer</strong> <span class="layer-desc">— Critical gap filler</span></div>
-          <div class="layer"><span class="layer-badge">L2</span> Data Normalization (USD / JSON / Streams)</div>
-          <div class="layer"><span class="layer-badge">L1</span> Raw Inputs (Caldera / Sensors / IoT / Edge)</div>
+        <div>
+          <h3>Key Differentiators</h3>
+          <ul class="feature-list">
+            <li>Terrain-aware reasoning (canonical world frame)</li>
+            <li>Dual-path inference (static + streaming)</li>
+            <li>Causal evaluation layer (D-effector)</li>
+            <li>Air-gap operable (no external network calls)</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <h3 style="margin-top: 3rem; margin-bottom: 1rem;">Component Modules</h3>
-        <div class="module-grid">
-          <div class="module-card">
-            <div class="module-dot" style="background: #6366f1;"></div>
-            <h4>Core</h4>
-            <p>Core entity, team, and capability models — foundational data structures.</p>
-          </div>
-          <div class="module-card">
-            <div class="module-dot" style="background: #10b981;"></div>
-            <h4>Enrichment</h4>
-            <p>Feature extraction, normalization, and behavioral inference — L3 MVP core.</p>
-          </div>
-          <div class="module-card">
-            <div class="module-dot" style="background: #f59e0b;"></div>
-            <h4>Ingestion</h4>
-            <p>USD loading and breadcrumbs parsing — L2 data normalization.</p>
-          </div>
-          <div class="module-card">
-            <div class="module-dot" style="background: #ef4444;"></div>
-            <h4>IO</h4>
-            <p>World state adapter and diagnostics — external data exchange interfaces.</p>
-          </div>
-          <div class="module-card">
-            <div class="module-dot" style="background: #8b5cf6;"></div>
-            <h4>Pipeline</h4>
-            <p>Diagnostic runner and pipeline orchestration.</p>
-          </div>
-          <div class="module-card">
-            <div class="module-dot" style="background: #ec4899;"></div>
-            <h4>Roles</h4>
-            <p>Rule evaluation, score aggregation, and role classification.</p>
+  <!-- SCENARIOS SECTION -->
+  <section id="scenarios" class="section" style="background-image: url('https://images.unsplash.com/photo-1614728423169-3f65fd72e207?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Operational Scenarios</p>
+      <h2>Degraded Conditions</h2>
+      <p>Capabilities that cannot operate under degraded conditions are laboratory curiosities. These scenarios represent the operational envelope.</p>
+
+      <div class="scenario-grid">
+        <div class="scenario-card">
+          <p class="scenario-label">Fog of War</p>
+          <h3>Partial Visibility Engagement</h3>
+          <p>40% sensor coverage, intermittent thermal signatures. Sparse Detection → Trajectory Imputation → Feature Enrichment → Streaming Inference → Role Classification → Confidence Tagging.</p>
+          <div class="scenario-output">
+            <span>2 entities (SCOUT)</span>
+            <span>0.58 confidence</span>
+            <span>~180ms</span>
           </div>
         </div>
-
-        <div class="pipeline-flow">
-          <span class="stage">Data Ingestion</span>
-          <span class="arrow">→</span>
-          <span class="stage">Feature Enrichment</span>
-          <span class="arrow">→</span>
-          <span class="stage">Behavioral Inference</span>
-          <span class="arrow">→</span>
-          <span class="stage">Role Classification</span>
-          <span class="arrow">→</span>
-          <span class="stage">Decision Signal (WISDOM)</span>
-          <span class="arrow">→</span>
-          <span class="stage">Evaluation</span>
-        </div>
-      </section>
-
-      <!-- OPERATIONAL SCENARIOS TAB -->
-      <section id="operational" class="tab-content">
-        <h2>Operational Value</h2>
-        <p class="section-desc">Problem classes addressed by the behavioral early-warning system.</p>
-
-        <div class="scenario-timeline">
-          <div class="timeline-item">
-            <div class="time-label">STEP 1 — Baseline</div>
-            <h4>Normal Patrol</h4>
-            <p>Distributed movement. Moderate interaction graph density. Spectral gap stable. Role distribution matches expected operational pattern.</p>
-            <span class="status-tag green">Tracking: NORMAL</span>
-          </div>
-          <div class="timeline-item">
-            <div class="time-label">STEP 2 — Coordination begins</div>
-            <h4>Graph tightens</h4>
-            <p>Edge persistence increases. Multiple entities show decreasing inter-distance simultaneously. Coordination indicators rise.</p>
-            <span class="status-tag green">Tracking: NORMAL</span>
-            <span class="status-tag yellow">Behavioral: RISING</span>
-          </div>
-          <div class="timeline-item">
-            <div class="time-label">STEP 3 — Instability emerges</div>
-            <h4>Regime transition</h4>
-            <p>Spectral gap shifts. Role transition entropy increases. Entities switch behavioral patterns. System flags pre-event instability.</p>
-            <span class="status-tag green">Tracking: NORMAL</span>
-            <span class="status-tag yellow">Behavioral: REGIME SHIFT</span>
-            <span class="status-tag red">Warning: ISSUED</span>
-          </div>
-          <div class="timeline-item">
-            <div class="time-label">STEP 4 — Visible event</div>
-            <h4>Coordination overt</h4>
-            <p>Conventional tracking now shows organized behavior. System issued early warning before overt indicators were apparent.</p>
-            <span class="status-tag red">Tracking: EVENT VISIBLE</span>
-            <span class="status-tag red">Warning: CONFIRMED</span>
+        <div class="scenario-card">
+          <p class="scenario-label">Edge Compute</p>
+          <h3>Night Vision Integration</h3>
+          <p>Embedded in helmet NVGs + drone ISR + edge compute. No cloud, <100ms latency required. Thermal Feed → On-device Ingestion → Local Inference → HUD Overlay.</p>
+          <div class="scenario-output">
+            <span>30Hz real-time</span>
+            <span>ATTACKER/SCOUT/DEFEND</span>
+            <span>2s prediction</span>
           </div>
         </div>
-
-        <div class="problem-cards">
-          <div class="problem-card">
-            <h4>Pattern-of-life ambiguity</h4>
-            <p>Separates ordinary activity from meaningful behavioral change using regime-conditioned inference.</p>
-          </div>
-          <div class="problem-card">
-            <h4>Early warning gap</h4>
-            <p>Graph spectral shift and interaction topology change detect precursors before kinetic indicators emerge.</p>
-          </div>
-          <div class="problem-card">
-            <h4>Multi-agent complexity</h4>
-            <p>Compresses 118-agent coordination patterns into analyst-actionable indicators.</p>
-          </div>
-          <div class="problem-card">
-            <h4>Decision latency</h4>
-            <p>From raw tracks to decision cue in seconds vs. analyst-only workflows.</p>
+        <div class="scenario-card">
+          <p class="scenario-label">Disconnected</p>
+          <h3>No C2 - Full Autonomy</h3>
+          <p>Communication denial, local decision authority required. Local Sensor Feed → Offline Enrichment → Autonomous Inference → Decision Recommendation + Confidence + Risk.</p>
+          <div class="scenario-output">
+            <span>ENGAGE/OBSERVE/REPOSITION</span>
+            <span>Per-route scoring</span>
+            <span>Conservative bias</span>
           </div>
         </div>
-      </section>
-
-      <!-- SYSTEM DYNAMICS TAB -->
-      <section id="dynamics" class="tab-content">
-        <h2>System Dynamics & Evaluation</h2>
-        <p class="section-desc">Technical depth and evaluation metrics for the behavioral inference system.</p>
-
-        <div class="dynamics-grid">
-          <div class="dynamics-card">
-            <h4>Evaluation Metrics</h4>
-            <ul>
-              <li>Holdout testing on synthetic scenarios</li>
-              <li>Stability analysis across temporal splits</li>
-              <li>Pressure distribution validation</li>
-              <li>Signal confidence scoring</li>
-            </ul>
-          </div>
-          <div class="dynamics-card">
-            <h4>Diagnostic Integrity</h4>
-            <ul>
-              <li class="green">✓ Pressure non-degenerate</li>
-              <li class="green">✓ Neighbors non-uniform</li>
-              <li class="green">✓ Alignment skew present</li>
-              <li class="green">✓ Signal confidence OK (0.998)</li>
-            </ul>
-          </div>
-          <div class="dynamics-card">
-            <h4>Key Differentiators</h4>
-            <ul>
-              <li>Dual inference paths (static + streaming)</li>
-              <li>End-to-end latency under 500ms</li>
-              <li>WISDOM contract v1 stable</li>
-              <li>Offline-capable runtime</li>
-            </ul>
-          </div>
-          <div class="dynamics-card">
-            <h4>Deployment Readiness</h4>
-            <ul>
-              <li>Python-native pipeline</li>
-              <li>No external network calls at runtime</li>
-              <li>Scales with entity count × timesteps</li>
-              <li>Air-gap capable (defense requirement)</li>
-            </ul>
+        <div class="scenario-card">
+          <p class="scenario-label">Live ISR</p>
+          <h3>Drone Stream Analysis</h3>
+          <p>Streaming behavioral engine → operator guidance. <150ms aerial-to-decision. Drone Feed → Streaming Behavioral Engine → Role Classification → Threat Estimation → Map Overlay.</p>
+          <div class="scenario-output">
+            <span>~95ms</span>
+            <span>HIGH priority alert</span>
+            <span>120m force disposition</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="roadmap">
-          <h4>Capability Roadmap</h4>
-          <div class="roadmap-items">
-            <div class="roadmap-item">
-              <span class="tag green">NOW</span>
-              <strong>Analyst decision support</strong>
-              <span>Role inference, regime reports, behavioral indicators</span>
-            </div>
-            <div class="roadmap-item">
-              <span class="tag">NEXT</span>
-              <strong>ISR integration</strong>
-              <span>Sensor fusion pipeline, real-time streaming mode</span>
-            </div>
-            <div class="roadmap-item">
-              <span class="tag">FUTURE</span>
-              <strong>Edge deployment</strong>
-              <span>Embedded runtime, tactical edge compute</span>
-            </div>
+  <!-- DYNAMICS SECTION -->
+  <section id="dynamics" class="section" style="background-image: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1920&q=80');">
+    <div class="content">
+      <p class="label">System Dynamics</p>
+      <h2>Feedback & Stability</h2>
+      <p>The system exhibits temporal behaviors: feedback loops, stream/batch divergence, convergence zones, and instability triggers.</p>
+
+      <div class="dynamics-grid">
+        <div class="dynamics-item">
+          <h3>Feedback Loops</h3>
+          <p>Evaluation → pipeline recalibration creates positive loop. Model improvements enhance evaluation accuracy.</p>
+        </div>
+        <div class="dynamics-item">
+          <h3>Stream/Batch Divergence</h3>
+          <p>EMA-based normalization diverges from static features over time. Monitoring required for long-running sessions.</p>
+        </div>
+        <div class="dynamics-item">
+          <h3>Convergence Zones</h3>
+          <p>Static features stabilize after ~50 entities. Latency bounded at P95 < 500ms for 100 entities.</p>
+        </div>
+        <div class="dynamics-item">
+          <h3>Instability Triggers</h3>
+          <p>Novel scenarios break rule thresholds. Rule brittleness + metric illusion risk on synthetic data.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 64px;">
+        <h3>Evaluation Metrics</h3>
+        <div class="eval-stats">
+          <div>
+            <div class="stat-value">167</div>
+            <div class="stat-label">Test Files</div>
+          </div>
+          <div>
+            <div class="stat-value">34</div>
+            <div class="stat-label">Classes</div>
+          </div>
+          <div>
+            <div class="stat-value">156</div>
+            <div class="stat-label">Edges</div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE FLOW SECTION -->
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Value Flow</p>
+      <h2>Data to Intelligence</h2>
+      <p>Value propagates through five stages. Each transformation increases confidence and reduces uncertainty for decision-makers.</p>
+
+      <div class="pipeline-full">
+        <div class="pipe-stage">
+          <span class="pipe-num">01</span>
+          <span>Raw Trajectories</span>
+        </div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-stage">
+          <span class="pipe-num">02</span>
+          <span>Structured Signals</span>
+        </div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-stage">
+          <span class="pipe-num">03</span>
+          <span>Behavioral Patterns</span>
+        </div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-stage">
+          <span class="pipe-num">04</span>
+          <span>Role Attribution</span>
+        </div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-stage">
+          <span class="pipe-num">05</span>
+          <span>Strategic Insight</span>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 64px;">
+        <div>
+          <h3>Confidence Growth</h3>
+          <p>Uncertainty decreases as data flows through pipeline. Raw data: low confidence. Strategic insight: high confidence.</p>
+        </div>
+        <div>
+          <h3>Latency Budget</h3>
+          <p>Ingestion is variable; enrichment and pattern detection are bounded. Signal generation is deterministic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAILURE MODES SECTION -->
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Risk Assessment</p>
+      <h2>Failure Modes</h2>
+      <p>Understanding where the system fails is as important as understanding what it does.</p>
+
+      <div class="fail-grid">
+        <div class="fail-item critical">
+          <h3>Data Sparsity</h3>
+          <p>Incomplete breadcrumbs propagate through all downstream stages. 5% location error → 20% behavioral misclassification.</p>
+        </div>
+        <div class="fail-item">
+          <h3>Terrain Mis-modeling</h3>
+          <p>Terrain cost field inaccuracies → suboptimal path inference.</p>
+        </div>
+        <div class="fail-item">
+          <h3>Misclassification</h3>
+          <p>Static/streaming divergence → entity role errors.</p>
+        </div>
+        <div class="fail-item">
+          <h3>Rule Brittleness</h3>
+          <p>Rule thresholds fail on novel tactical scenarios.</p>
+        </div>
+        <div class="fail-item warning">
+          <h3>Metric Illusion</h3>
+          <p>F1 > 70% achieved on synthetic data. Real operational performance unknown.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATION SECTION -->
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Competitive Position</p>
+      <h2>Differentiation</h2>
+      <p>Four capabilities represent our defensible differentiators — technically difficult to replicate and providing measurable operational advantage.</p>
+
+      <div class="diff-grid">
+        <div class="diff-item">
+          <span class="diff-num">01</span>
+          <h3>Terrain-Aware Reasoning</h3>
+          <p>Canonical world frame + cost field propagation. Competitors use simple distance metrics; we model actual traversability.</p>
+        </div>
+        <div class="diff-item">
+          <span class="diff-num">02</span>
+          <h3>Dual-Path Inference</h3>
+          <p>Only system with parallel static + streaming behavioral inference. Enables both retrospective analysis and live tracking.</p>
+        </div>
+        <div class="diff-item">
+          <span class="diff-num">03</span>
+          <h3>Causal Evaluation</h3>
+          <p>D-effector + critically damped controller for stable, accurate evaluation.</p>
+        </div>
+        <div class="diff-item">
+          <span class="diff-num">04</span>
+          <h3>Air-Gap Operable</h3>
+          <p>No external network dependencies. Deployable in classified environments. Competitors require cloud connectivity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOUT -->
+  <div class="logout-section">
+    <a href="/" class="ghost-btn">Sign Out</a>
+    <p class="classification">UNCLASSIFIED // FOR DEMONSTRATION ONLY</p>
   </div>
 </Layout>
 
 <style>
-  .dashboard {
-    min-height: 100vh;
-    background: var(--bg-dark);
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border);
-    background: rgba(30, 41, 59, 0.5);
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .header-title h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-
-  .classification {
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    letter-spacing: 1px;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .user-badge {
-    background: var(--primary);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-  }
-
-  .btn-logout {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-
-  .btn-logout:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-main);
-  }
-
-  .notice {
-    background: rgba(99, 102, 241, 0.1);
-    border-left: 3px solid var(--primary);
-    padding: 1rem 2rem;
-    margin: 1rem 2rem;
-    border-radius: 0 8px 8px 0;
-  }
-
-  .notice p {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-
-  .nav-tabs {
-    display: flex;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-  }
-
-  .tab {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-  }
-
-  .tab:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-main);
-  }
-
-  .tab.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
-  }
-
-  .content {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .tab-content {
-    display: none;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
-
-  .tab-content h2 {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .section-desc {
-    color: var(--text-dim);
-    margin-bottom: 2rem;
-    font-size: 1rem;
-  }
-
-  /* CAPABILITIES */
-  .capability-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .cap-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
-
-  .cap-card.highlight {
-    border-color: var(--primary);
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, var(--bg-card) 100%);
-  }
-
-  .cap-num {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-
-  .cap-num.blue { color: #93c5fd; }
-
-  .cap-card h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .blue-text { color: #93c5fd; }
-
-  .cap-sub {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin-bottom: 1rem;
-  }
-
-  .cap-card ul {
-    list-style: none;
-    margin-bottom: 1rem;
-  }
-
-  .cap-card ul li {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-bottom: 0.5rem;
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .cap-card ul li::before {
-    content: '→';
-    position: absolute;
+  nav {
+    position: fixed;
+    top: 0;
     left: 0;
-    color: var(--primary);
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
   }
 
-  .quote {
-    background: rgba(15, 23, 42, 0.5);
-    border-left: 3px solid var(--text-dim);
-    padding: 0.75rem;
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    font-style: italic;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .quote.blue-border {
-    border-left-color: #93c5fd;
-  }
-
-  .quote.blue-border p {
-    color: #93c5fd;
-  }
-
-  .metrics-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
-
-  .metric {
-    text-align: center;
-  }
-
-  .metric-value {
-    font-size: 2rem;
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
     font-weight: 700;
-    color: var(--primary);
-    font-family: var(--font-mono);
   }
 
-  .metric-label {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    margin-top: 0.25rem;
+  nav a:hover {
+    opacity: 0.7;
   }
 
-  /* ARCHITECTURE */
-  .arch-layers {
+  /* LAYER LIST */
+  .layer-list {
+    margin-top: 48px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 12px;
   }
 
-  .layer {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
+  .layer-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(240, 240, 250, 0.1);
   }
 
-  .layer.core {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, var(--bg-card) 100%);
-    border-color: var(--primary);
+  .layer-item.core {
+    border: 1px solid var(--ghost-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: rgba(99, 102, 241, 0.1);
   }
 
-  .layer-badge {
-    background: var(--bg-dark);
-    color: var(--text-dim);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
+  .layer-num {
+    font-size: 10px;
+    font-weight: 700;
+    opacity: 0.5;
+    min-width: 24px;
   }
 
-  .layer-badge.core {
-    background: rgba(99, 102, 241, 0.2);
-    color: var(--primary);
-  }
-
-  .layer-desc {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-  }
-
+  /* MODULE GRID */
   .module-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .module-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-  }
-
-  .module-card h4 {
-    font-size: 1rem;
-    margin: 0.5rem 0 0.25rem;
-  }
-
-  .module-card p {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-  }
-
-  .module-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .pipeline-flow {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: rgba(15, 23, 42, 0.5);
-    border-radius: 8px;
-    margin-top: 1.5rem;
-    overflow-x: auto;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
   }
 
-  .pipeline-flow .stage {
-    background: var(--bg-card);
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-
-  .pipeline-flow .arrow {
-    color: var(--primary);
-    font-weight: bold;
-  }
-
-  /* OPERATIONAL */
-  .scenario-timeline {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    overflow-x: auto;
-  }
-
-  .timeline-item {
-    flex: 1;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    min-width: 250px;
-  }
-
-  .time-label {
-    font-size: 0.7rem;
-    color: var(--primary);
+  .module-tag {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.5rem;
   }
 
-  .timeline-item h4 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+  /* FEATURE LIST */
+  .feature-list {
+    list-style: none;
+    margin-top: 16px;
   }
 
-  .timeline-item p {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    margin-bottom: 0.75rem;
-    line-height: 1.5;
+  .feature-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(240, 240, 250, 0.1);
+    font-size: 14px;
   }
 
-  .status-tag {
-    display: inline-block;
-    font-size: 0.7rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    margin-right: 0.25rem;
-  }
-
-  .status-tag.green { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-  .status-tag.yellow { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-  .status-tag.red { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-
-  .problem-cards {
+  /* SCENARIO GRID */
+  .scenario-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 32px;
+    margin-top: 48px;
   }
 
-  .problem-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
+  .scenario-card {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 16px;
+    padding: 32px;
   }
 
-  .problem-card h4 {
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
+  .scenario-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    margin-bottom: 12px;
   }
 
-  .problem-card p {
-    font-size: 0.85rem;
-    color: var(--text-dim);
+  .scenario-card h3 {
+    margin-bottom: 12px;
   }
 
-  /* DYNAMICS */
+  .scenario-card p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 24px;
+  }
+
+  .scenario-output {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .scenario-output span {
+    font-size: 11px;
+    padding: 6px 12px;
+    background: rgba(240, 240, 250, 0.1);
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* DYNAMICS GRID */
   .dynamics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 32px;
+    margin-top: 48px;
   }
 
-  .dynamics-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+  .dynamics-item {
+    padding: 24px;
+    border: 1px solid rgba(240, 240, 250, 0.1);
     border-radius: 8px;
-    padding: 1.25rem;
   }
 
-  .dynamics-card h4 {
-    font-size: 0.95rem;
-    margin-bottom: 0.75rem;
-    color: var(--primary);
+  .dynamics-item h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
   }
 
-  .dynamics-card ul {
-    list-style: none;
+  .dynamics-item p {
+    font-size: 14px;
+    opacity: 0.7;
   }
 
-  .dynamics-card ul li {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin-bottom: 0.5rem;
-  }
-
-  .dynamics-card ul li.green {
-    color: #34d399;
-  }
-
-  .roadmap {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-  }
-
-  .roadmap h4 {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
-  .roadmap-items {
+  /* EVAL STATS */
+  .eval-stats {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    gap: 48px;
+    margin-top: 24px;
   }
 
-  .roadmap-item {
+  /* PIPELINE FULL */
+  .pipeline-full {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding-left: 1rem;
-    border-left: 2px solid var(--border);
+    gap: 16px;
+    margin-top: 48px;
+    flex-wrap: wrap;
   }
 
-  .roadmap-item .tag {
-    font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
+  .pipe-stage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 8px;
+    padding: 16px 20px;
   }
 
-  .roadmap-item .tag.green {
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
+  .pipe-num {
+    font-size: 10px;
+    opacity: 0.5;
   }
 
-  .roadmap-item strong {
-    font-size: 0.9rem;
-    min-width: 150px;
+  .pipe-arrow {
+    opacity: 0.4;
   }
 
-  .roadmap-item span {
-    font-size: 0.8rem;
-    color: var(--text-dim);
+  /* FAIL GRID */
+  .fail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
   }
 
-  @media (max-width: 900px) {
-    .capability-grid,
-    .module-grid,
-    .problem-cards,
-    .dynamics-grid {
-      grid-template-columns: 1fr;
-    }
+  .fail-item {
+    padding: 24px;
+    border: 1px solid rgba(240, 240, 250, 0.1);
+    border-radius: 8px;
+  }
 
-    .metrics-row {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .fail-item.critical {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+  }
 
-    .scenario-timeline {
-      flex-direction: column;
-    }
+  .fail-item.warning {
+    border-color: rgba(245, 158, 11, 0.5);
+    background: rgba(245, 158, 11, 0.1);
+  }
+
+  .fail-item h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .fail-item p {
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  /* DIFF GRID */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .diff-item {
+    position: relative;
+    padding-left: 64px;
+  }
+
+  .diff-num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 32px;
+    font-weight: 700;
+    opacity: 0.2;
+  }
+
+  .diff-item h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .diff-item p {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  /* LOGOUT SECTION */
+  .logout-section {
+    padding: 80px 5%;
+    text-align: center;
+    background: var(--space-black);
+  }
+
+  .classification {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.4;
+    margin-top: 32px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { gap: 16px; }
+    nav a { font-size: 10px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 24px; }
+    .grid, .scenario-grid, .dynamics-grid, .fail-grid, .diff-grid { grid-template-columns: 1fr; }
+    .pipeline-full { flex-direction: column; align-items: flex-start; }
+    .stats { gap: 24px; }
   }
 </style>
-
-<script>
-  const tabs = document.querySelectorAll('.tab');
-  const contents = document.querySelectorAll('.tab-content');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      contents.forEach(c => c.classList.remove('active'));
-
-      tab.classList.add('active');
-      const target = document.getElementById(tab.getAttribute('data-tab')!);
-      target?.classList.add('active');
-    });
-  });
-</script>

@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Operational Scenarios - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/drill">Drill</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1614728423169-3f65fd72e207?w=1920&q=80');">
+    <div class="content">
+      <p class="label">06_operational_scenarios.html</p>
+      <h1>Operational Scenarios</h1>
+      <p>Real-world deployment constraints and system responses. Capabilities that cannot operate under degraded conditions are laboratory curiosities.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <p class="scenario-label">Fog of War</p>
+        <h3>Partial Visibility Engagement</h3>
+        <p>40% sensor coverage, intermittent thermal signatures. Sparse Detection → Trajectory Imputation → Feature Enrichment → Streaming Inference → Role Classification → Confidence Tagging.</p>
+        <div class="scenario-output">
+          <span>2 entities (SCOUT)</span>
+          <span>0.58 confidence</span>
+          <span>~180ms</span>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <p class="scenario-label">Edge Compute</p>
+        <h3>Night Vision Integration</h3>
+        <p>Embedded in helmet NVGs + drone ISR + edge compute. No cloud, <100ms latency required. Thermal Feed → On-device Ingestion → Local Inference → HUD Overlay.</p>
+        <div class="scenario-output">
+          <span>30Hz real-time</span>
+          <span>ATTACKER/SCOUT/DEFEND</span>
+          <span>2s prediction</span>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <p class="scenario-label">Disconnected</p>
+        <h3>No C2 - Full Autonomy</h3>
+        <p>Communication denial, local decision authority required. Local Sensor Feed → Offline Enrichment → Autonomous Inference → Decision Recommendation + Confidence + Risk.</p>
+        <div class="scenario-output">
+          <span>ENGAGE/OBSERVE/REPOSITION</span>
+          <span>Per-route scoring</span>
+          <span>Conservative bias</span>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <p class="scenario-label">Live ISR</p>
+        <h3>Drone Stream Analysis</h3>
+        <p>Streaming behavioral engine → operator guidance. <150ms aerial-to-decision. Drone Feed → Streaming Behavioral Engine → Role Classification → Threat Estimation → Map Overlay.</p>
+        <div class="scenario-output">
+          <span>~95ms</span>
+          <span>HIGH priority alert</span>
+          <span>120m force disposition</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .content-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .scenario-card {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .scenario-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .scenario-output {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .scenario-output span {
+    font-size: 11px;
+    padding: 6px 12px;
+    background: rgba(240, 240, 250, 0.1);
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 768px) {
+    .scenario-grid { grid-template-columns: 1fr; }
+  }
+</style>

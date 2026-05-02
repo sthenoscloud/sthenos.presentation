@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Failure Modes - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/drill">Drill</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&q=80');">
+    <div class="content">
+      <p class="label">03_failure_modes.html</p>
+      <h1>Failure Modes & Risk</h1>
+      <p>Critical vulnerabilities that could compromise system reliability. Understanding where the system fails is as important as understanding what it does.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="fail-grid">
+      <div class="fail-item critical">
+        <span class="fail-num">01</span>
+        <div>
+          <h3>Data Sparsity</h3>
+          <p>Insufficient breadcrumbs → incomplete trajectory reconstruction. Errors propagate through all downstream stages.</p>
+        </div>
+      </div>
+      <div class="fail-item">
+        <span class="fail-num">02</span>
+        <div>
+          <h3>Terrain Mis-modeling</h3>
+          <p>Terrain cost field inaccuracies → suboptimal path inference.</p>
+        </div>
+      </div>
+      <div class="fail-item">
+        <span class="fail-num">03</span>
+        <div>
+          <h3>Behavioral Misclassification</h3>
+          <p>Static/streaming divergence → entity role errors.</p>
+        </div>
+      </div>
+      <div class="fail-item">
+        <span class="fail-num">04</span>
+        <div>
+          <h3>Rule Brittleness</h3>
+          <p>Rule thresholds fail on novel tactical scenarios.</p>
+        </div>
+      </div>
+      <div class="fail-item warning">
+        <span class="fail-num">05</span>
+        <div>
+          <h3>Metric Illusion</h3>
+          <p>F1 > 70% but eval on synthetic data only — real gap unknown.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top: 64px;">
+      <h3>Error Amplification</h3>
+      <p>Small errors in ingestion compound through inference. A 5% location error can become 20% behavioral misclassification.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .content-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .fail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .fail-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+  }
+
+  .fail-item.critical {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  .fail-item.warning {
+    border-color: rgba(245, 158, 11, 0.5);
+    background: rgba(245, 158, 11, 0.1);
+  }
+
+  .fail-num {
+    font-size: 32px;
+    font-weight: 700;
+    opacity: 0.2;
+  }
+
+  h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+
+  .insight-box {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    padding: 32px;
+  }
+
+  .insight-box h3 {
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .fail-grid { grid-template-columns: 1fr; }
+  }
+</style>

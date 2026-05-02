@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Value Flow - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/drill">Drill</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">02_value_flow.html</p>
+      <h1>Value Flow</h1>
+      <p>How raw data transforms into strategic advantage. Value propagates through five stages. Each transformation increases confidence and reduces uncertainty for decision-makers.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="value-stages">
+      <div class="stage">
+        <span class="stage-num">01</span>
+        <div class="stage-content">
+          <h3>Raw Trajectories</h3>
+          <p>Movement traces + geometry from Caldera. Low confidence, high uncertainty.</p>
+        </div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage">
+        <span class="stage-num">02</span>
+        <div class="stage-content">
+          <h3>Structured Signals</h3>
+          <p>Normalized features + spatial context. Confidence rising.</p>
+        </div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage">
+        <span class="stage-num">03</span>
+        <div class="stage-content">
+          <h3>Behavioral Patterns</h3>
+          <p>Interaction graphs + temporal features. Pattern recognition.</p>
+        </div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage">
+        <span class="stage-num">04</span>
+        <div class="stage-content">
+          <h3>Role Attribution</h3>
+          <p>Entity classification + decision traces. High confidence.</p>
+        </div>
+      </div>
+      <div class="stage-arrow">→</div>
+      <div class="stage highlight">
+        <span class="stage-num">05</span>
+        <div class="stage-content">
+          <h3>Strategic Insight</h3>
+          <p>WISDOM-aligned output for decision support. Highest confidence.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top: 64px;">
+      <div>
+        <h3>Confidence Growth</h3>
+        <p>Uncertainty decreases as data flows through pipeline. Raw data: low confidence. Strategic insight: high confidence.</p>
+      </div>
+      <div>
+        <h3>Latency Budget</h3>
+        <p>Ingestion is variable; enrichment and pattern detection are bounded. Signal generation is deterministic.</p>
+      </div>
+      <div>
+        <h3>Value Accumulation</h3>
+        <p>Each transformation stage adds context. Raw GPS → enriched features → interaction graphs → role labels.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .content-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .value-stages {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stage {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    padding: 24px;
+    min-width: 200px;
+  }
+
+  .stage.highlight {
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .stage-num {
+    font-size: 24px;
+    font-weight: 700;
+    opacity: 0.3;
+  }
+
+  h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+
+  .stage-arrow {
+    font-size: 24px;
+    opacity: 0.3;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .value-stages { flex-direction: column; }
+    .stage-arrow { transform: rotate(90deg); }
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="System Dynamics - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/drill">Drill</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1920&q=80');">
+    <div class="content">
+      <p class="label">05_system_dynamics.html</p>
+      <h1>System Dynamics</h1>
+      <p>Temporal behavior, feedback loops, and stability characteristics. The system is not static. It exhibits temporal behaviors that require monitoring.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="dynamics-grid">
+      <div class="dynamics-item">
+        <div class="dyn-marker" style="background: #a855f7;"></div>
+        <h3>Feedback Loops</h3>
+        <p>Evaluation → pipeline recalibration creates positive loop. Model improvements enhance evaluation accuracy.</p>
+      </div>
+      <div class="dynamics-item">
+        <div class="dyn-marker" style="background: #f59e0b;"></div>
+        <h3>Stream/Batch Divergence</h3>
+        <p>EMA-based normalization diverges from static features over time. Monitoring required for long-running sessions.</p>
+      </div>
+      <div class="dynamics-item">
+        <div class="dyn-marker" style="background: #22c55e;"></div>
+        <h3>Convergence Zones</h3>
+        <p>Static features stabilize after ~50 entities. Latency bounded at P95 < 500ms for 100 entities.</p>
+      </div>
+      <div class="dynamics-item">
+        <div class="dyn-marker" style="background: #ef4444;"></div>
+        <h3>Instability Triggers</h3>
+        <p>Novel scenarios break rule thresholds. Rule brittleness + metric illusion risk on synthetic data.</p>
+      </div>
+    </div>
+
+    <div class="latency-box">
+      <h3>Latency Bounded</h3>
+      <p>P95 < 500ms for 100 entities. Scales linearly with entity count. No quadratic complexity surprises.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .content-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .dynamics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .dynamics-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+  }
+
+  .dyn-marker {
+    width: 4px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+
+  .latency-box {
+    margin-top: 48px;
+    padding: 32px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+  }
+
+  .latency-box h3 {
+    color: #818cf8;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .dynamics-grid { grid-template-columns: 1fr; }
+  }
+</style>

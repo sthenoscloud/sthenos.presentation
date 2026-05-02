@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pages = [
+  { name: '01_capabilities', title: 'System Capabilities', desc: 'The six core capabilities that transform raw data into strategic intelligence' },
+  { name: '02_value_flow', title: 'Value Flow', desc: 'How raw data transforms into strategic advantage' },
+  { name: '03_failure_modes', title: 'Failure Modes & Risk', desc: 'Critical vulnerabilities that could compromise system reliability' },
+  { name: '04_differentiation', title: 'Competitive Differentiation', desc: 'The defensible technical advantages that create strategic value' },
+  { name: '05_system_dynamics', title: 'System Dynamics', desc: 'Temporal behavior, feedback loops, and stability characteristics' },
+  { name: '06_operational_scenarios', title: 'Operational Scenarios', desc: 'Real-world deployment constraints and system responses' },
+  { name: 'Architecture', title: 'Architecture Overview', desc: '7-Layer Defense AI Platform overview' },
+  { name: 'Architecture_Core', title: 'Architecture - Core', desc: 'Core entity, team, and capability models' },
+  { name: 'Architecture_Enrichment', title: 'Architecture - Enrichment', desc: 'Feature extraction, normalization, and behavioral inference' },
+  { name: 'Architecture_Ingestion', title: 'Architecture - Ingestion', desc: 'USD loading and breadcrumbs parsing' },
+  { name: 'Architecture_IO', title: 'Architecture - IO', desc: 'World state adapter and diagnostics' },
+  { name: 'Architecture_Pipeline', title: 'Architecture - Pipeline', desc: 'Diagnostic runner and pipeline orchestration' },
+  { name: 'Architecture_Roles', title: 'Architecture - Roles', desc: 'Rule evaluation, score aggregation, and role classification' },
+  { name: 'Architecture_Evaluation', title: 'Architecture - Evaluation', desc: 'Synthetic validation and adapter diagnostics' },
+  { name: 'Architecture_Evaluation_Metrics', title: 'Architecture - Eval Metrics', desc: 'Evaluation metrics and testing' },
+  { name: 'Architecture_Evaluation_Splits', title: 'Architecture - Eval Splits', desc: 'Evaluation split analysis' },
+  { name: 'Architecture_Evaluation_Stability', title: 'Architecture - Eval Stability', desc: 'Stability analysis across temporal splits' },
+  { name: 'Architecture_CLI', title: 'Architecture - CLI', desc: 'Command-line interface' },
+];
+---
+
+<Layout title="Architecture Drill - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/dashboard">Dashboard</a>
+  </nav>
+
+  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1516849841032-87cbac4d0383?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Reference Documentation</p>
+      <h1>Architecture Drill</h1>
+      <p>Detailed architecture documentation for the 7-Layer Defense AI Platform. Each section covers a specific component and its role in the system.</p>
+      <div class="stats">
+        <div>
+          <div class="stat-value">18</div>
+          <div class="stat-label">Documentation Pages</div>
+        </div>
+        <div>
+          <div class="stat-value">7</div>
+          <div class="stat-label">Architecture Layers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-section">
+    <div class="content">
+      <h2>Core Sections</h2>
+      <div class="page-grid">
+        {pages.slice(0, 6).map(page => (
+          <a href={`/drill/${page.name}`} class="page-card">
+            <h3>{page.title}</h3>
+            <p>{page.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <h2 style="margin-top: 64px;">Architecture Modules</h2>
+      <div class="page-grid">
+        {pages.slice(6).map(page => (
+          <a href={`/drill/${page.name}`} class="page-card">
+            <h3>{page.title}</h3>
+            <p>{page.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .grid-section {
+    background: var(--space-black);
+    padding: 80px 5%;
+  }
+
+  .grid-section h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+    opacity: 0.6;
+  }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .page-card {
+    display: block;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 16px;
+    padding: 32px;
+    text-decoration: none;
+    color: var(--spectral-white);
+    transition: all 0.2s;
+  }
+
+  .page-card:hover {
+    background: rgba(240, 240, 250, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .page-card h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .page-card p {
+    font-size: 13px;
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .page-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .page-grid { grid-template-columns: 1fr; }
+    nav { gap: 16px; }
+    nav a { font-size: 10px; }
+  }
+</style>
