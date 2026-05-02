@@ -50,6 +50,7 @@ form.addEventListener('submit', async (e) => {
         <p id="errorMsg" class="error"></p>
       </form>
       <p class="disclaimer">UNCLASSIFIED // FOR DEMONSTRATION PURPOSES ONLY. This system is a conceptual prototype and does not represent an operational defense capability. No real operational data, classified information, or personally identifiable information is stored or processed.</p>
+      <p class="ownership-notice">The domain <strong>sthenos.ai</strong> and all associated site content, documentation, and intellectual property are held in trust and will be transferred to the rightful owner(s) of Sthenos AI upon request — instantly and without condition. All information is kept private and confidential.</p>
     </div>
   </section>
 </Layout>
@@ -153,5 +154,20 @@ form.addEventListener('submit', async (e) => {
     margin-top: 48px;
     max-width: 400px;
     line-height: 1.6;
+  }
+
+  .ownership-notice {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 16px;
+    max-width: 400px;
+    line-height: 1.6;
+    border-left: 2px solid rgba(240, 240, 250, 0.3);
+    padding-left: 12px;
+    color: rgba(240, 240, 250, 0.8);
+  }
+
+  .ownership-notice strong {
+    color: var(--spectral-white);
   }
 </style>
