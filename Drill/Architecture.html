@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture — sthenos.cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#6366f1;--bg-dark:#0f172a;--bg-card:rgba(30,41,59,0.7);--border:rgba(255,255,255,0.1);--text-main:#f8fafc;--text-dim:#94a3b8;--accent:#818cf8}
+body{font-family:'Outfit',sans-serif;background-color:var(--bg-dark);background-image:radial-gradient(at 0% 0%, rgba(99,102,241,0.15) 0px, transparent 50%),radial-gradient(at 100% 100%, rgba(129,140,248,0.1) 0px, transparent 50%);color:var(--text-main);min-height:100vh;padding:40px}
+.container{max-width:1400px;margin:0 auto}
+.header{text-align:center;margin-bottom:48px}
+.header h1{font-size:42px;font-weight:700;background:linear-gradient(135deg,#6366f1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.header p{color:var(--text-dim);font-size:16px;max-width:600px;margin:0 auto;line-height:1.6}
+.platform-layers{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
+.layer-chip{background:var(--bg-card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;font-size:12px;color:var(--text-dim)}
+.layer-chip.active{background:rgba(99,102,241,0.2);border-color:#6366f1;color:#818cf8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;text-decoration:none;color:var(--text-main);transition:all 0.3s;display:block}
+.card:hover{transform:translateY(-4px);border-color:var(--card-color);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.card-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.card h2{font-size:18px;font-weight:600;color:var(--text-main)}
+.card p{color:var(--text-dim);font-size:13px;line-height:1.6;margin-bottom:16px}
+.card-stats{display:flex;gap:12px;font-size:11px;color:var(--text-dim);flex-wrap:wrap}
+.card-stats span{background:rgba(255,255,255,0.05);padding:4px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace}
+.nav{display:flex;justify-content:center;gap:8px;margin-bottom:40px}
+.nav a{color:var(--text-dim);text-decoration:none;padding:8px 16px;border-radius:8px;font-size:13px;background:var(--bg-card);border:1px solid var(--border)}
+.nav a:hover{background:rgba(255,255,255,0.1)}
+.nav a.active{background:#6366f1;color:white}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+  <a href="Architecture.html">Overview</a>
+  <a href="Architecture_Core.html">Core</a>
+  <a href="Architecture_Enrichment.html">Enrichment</a>
+  <a href="Architecture_Ingestion.html">Ingestion</a>
+  <a href="Architecture_IO.html">IO</a>
+  <a href="Architecture_Pipeline.html">Pipeline</a>
+  <a href="Architecture_Roles.html">Roles</a>
+  <a href="Architecture_Evaluation_Metrics.html">Eval Metrics</a>
+  <a href="Architecture_Evaluation_Splits.html">Eval Splits</a>
+  <a href="Architecture_Evaluation_Stability.html">Eval Stability</a>
+  <a href="Architecture_CLI.html">CLI</a>
+</nav>
+  <div class="header">
+    <h1>7-Layer Defense AI Platform</h1>
+    <p>sthenos.cloud transforms incomplete operational datasets (raw movement traces, geometry) into actionable simulation environments for defense AI. The L3 MVP core produces WISDOM-aligned JSON with decision traces.</p>
+    <div class="platform-layers">
+      <span class="layer-chip">L1 Raw Inputs</span>
+      <span class="layer-chip">L2 Data Normalization</span>
+      <span class="layer-chip active">L3 Semantic Enrichment</span>
+      <span class="layer-chip">L4 Behavioral & Tactical</span>
+      <span class="layer-chip">L5 Synthetic Data</span>
+      <span class="layer-chip">L6 Decision Support</span>
+      <span class="layer-chip">L7 Strategic AI</span>
+    </div>
+  </div>
+  <div class="grid">
+
+    <a href="Architecture_Core.html" class="card" style="--card-color:#6366f1">
+      <div class="card-header">
+        <div class="card-dot" style="background:#6366f1"></div>
+        <h2>Core</h2>
+      </div>
+      <p>Core entity, team, and capability models — the foundational data structures used across all layers.</p>
+      <div class="card-stats">
+        <span>14 files</span>
+        <span>10 classes</span>
+        <span>0 functions</span>
+        <span>10 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_Enrichment.html" class="card" style="--card-color:#10b981">
+      <div class="card-header">
+        <div class="card-dot" style="background:#10b981"></div>
+        <h2>Enrichment</h2>
+      </div>
+      <p>Feature extraction, normalization, and behavioral inference — the L3 MVP core transforming raw traces into semantic signals.</p>
+      <div class="card-stats">
+        <span>69 files</span>
+        <span>27 classes</span>
+        <span>12 functions</span>
+        <span>52 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_Ingestion.html" class="card" style="--card-color:#f59e0b">
+      <div class="card-header">
+        <div class="card-dot" style="background:#f59e0b"></div>
+        <h2>Ingestion</h2>
+      </div>
+      <p>USD loading and breadcrumbs parsing from Caldera data — L2 data normalization layer.</p>
+      <div class="card-stats">
+        <span>50 files</span>
+        <span>15 classes</span>
+        <span>28 functions</span>
+        <span>43 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_IO.html" class="card" style="--card-color:#ef4444">
+      <div class="card-header">
+        <div class="card-dot" style="background:#ef4444"></div>
+        <h2>IO</h2>
+      </div>
+      <p>World state adapter and diagnostics — external data exchange and validation interfaces.</p>
+      <div class="card-stats">
+        <span>10 files</span>
+        <span>6 classes</span>
+        <span>1 functions</span>
+        <span>8 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_Pipeline.html" class="card" style="--card-color:#8b5cf6">
+      <div class="card-header">
+        <div class="card-dot" style="background:#8b5cf6"></div>
+        <h2>Pipeline</h2>
+      </div>
+      <p>Diagnostic runner and pipeline orchestration — coordinates the enrichment flow.</p>
+      <div class="card-stats">
+        <span>9 files</span>
+        <span>0 classes</span>
+        <span>7 functions</span>
+        <span>7 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_Roles.html" class="card" style="--card-color:#ec4899">
+      <div class="card-header">
+        <div class="card-dot" style="background:#ec4899"></div>
+        <h2>Roles</h2>
+      </div>
+      <p>Rule evaluation, score aggregation, and role classification — maps behavioral signals to tactical roles.</p>
+      <div class="card-stats">
+        <span>31 files</span>
+        <span>4 classes</span>
+        <span>24 functions</span>
+        <span>30 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_Evaluation.html" class="card" style="--card-color:#06b6d4">
+      <div class="card-header">
+        <div class="card-dot" style="background:#06b6d4"></div>
+        <h2>Evaluation</h2>
+      </div>
+      <p>Synthetic validation, edge cases, and adapter diagnostics — testing and quality assurance components.</p>
+      <div class="card-stats">
+        <span>167 files</span>
+        <span>34 classes</span>
+        <span>118 functions</span>
+        <span>156 edges</span>
+      </div>
+    </a>
+    <a href="Architecture_CLI.html" class="card" style="--card-color:#84cc16">
+      <div class="card-header">
+        <div class="card-dot" style="background:#84cc16"></div>
+        <h2>CLI</h2>
+      </div>
+      <p>Command-line interface for enrichment — user-facing entry point for the pipeline.</p>
+      <div class="card-stats">
+        <span>6 files</span>
+        <span>0 classes</span>
+        <span>4 functions</span>
+        <span>5 edges</span>
+      </div>
+    </a>
+  </div>
+</div>
+</body>
+</html>

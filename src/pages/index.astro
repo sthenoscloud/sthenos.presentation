@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const adminUsername = import.meta.env.ADMIN_USERNAME || 'admin';
+const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
 ---
 
 <Layout title="Platform Demonstration">
@@ -144,21 +147,16 @@ import Layout from '../layouts/Layout.astro';
   }
 </style>
 
-<script>
-  const form = document.getElementById('loginForm') as HTMLFormElement;
-  const errorMsg = document.getElementById('errorMsg') as HTMLElement;
-
-  const CREDENTIALS = {
-    username: 'admin',
-    password: 'Xk9#mP2$vL8@nQ4!'
-  };
+<script define:vars={{ adminUsername, adminPassword }}>
+  const form = document.getElementById('loginForm');
+  const errorMsg = document.getElementById('errorMsg');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const username = (document.getElementById('username') as HTMLInputElement).value;
-    const password = (document.getElementById('password') as HTMLInputElement).value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
+    if (username === adminUsername && password === adminPassword) {
       window.location.href = '/dashboard';
     } else {
       errorMsg.textContent = 'Access denied. Contact administrator.';

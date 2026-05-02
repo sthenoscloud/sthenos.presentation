@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Differentiation — sthenos.cloud</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        header { margin-bottom: 2rem; border-bottom: 1px solid #1e293b; padding-bottom: 1rem; }
+        h1 { font-size: 1.75rem; font-weight: 600; color: #f8fafc; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 0.95rem; color: #94a3b8; margin-bottom: 1rem; }
+        .meta { display: flex; gap: 1.5rem; font-size: 0.8rem; color: #64748b; }
+        .meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .narrative { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
+        .narrative h2 { font-size: 1.1rem; color: #38bdf8; margin-bottom: 0.75rem; }
+        .narrative p { font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; }
+        .graph-container { background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
+        #graph { width: 100%; height: 500px; border-radius: 8px; }
+        .legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #334155; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .insight-box { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 1.5rem; border: 1px solid #334155; }
+        .insight-box h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 1rem; }
+        .insight { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #334155; }
+        .insight:last-child { border-bottom: none; }
+        .insight-icon { font-size: 1.5rem; }
+        .insight-text { flex: 1; }
+        .insight-text h4 { font-size: 0.95rem; color: #f8fafc; margin-bottom: 0.3rem; }
+        .insight-text p { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; }
+        nav { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        nav a { padding: 0.6rem 1.2rem; background: #1e293b; color: #94a3b8; text-decoration: none; border-radius: 8px; font-size: 0.85rem; transition: all 0.2s; }
+        nav a:hover { background: #334155; color: #f8fafc; }
+        nav a.active { background: #6366f1; color: #fff; }
+        .scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+        .scenario { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 1.5rem; border: 1px solid #334155; }
+        .scenario-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .scenario-icon { font-size: 2rem; }
+        .scenario-title { flex: 1; }
+        .scenario-title h3 { font-size: 1.1rem; color: #f8fafc; margin-bottom: 0.2rem; }
+        .scenario-title p { font-size: 0.8rem; color: #94a3b8; }
+        .scenario-constraint { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; margin-bottom: 1rem; }
+        .constraint-degraded { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .constraint-edge { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .constraint-latency { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .pipeline-flow { display: flex; align-items: center; gap: 0.5rem; padding: 1rem; background: #0f172a; border-radius: 8px; margin: 1rem 0; font-family: monospace; font-size: 0.85rem; color: #cbd5e1; overflow-x: auto; }
+        .pipeline-flow .stage { padding: 0.5rem 0.8rem; background: #1e293b; border-radius: 6px; white-space: nowrap; }
+        .pipeline-flow .arrow { color: #6366f1; font-weight: bold; }
+        .output-box { background: #0f172a; border-radius: 8px; padding: 1rem; border: 1px solid #334155; }
+        .output-box h4 { font-size: 0.9rem; color: #38bdf8; margin-bottom: 0.75rem; }
+        .output-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #1e293b; }
+        .output-item:last-child { border-bottom: none; }
+        .output-label { font-size: 0.85rem; color: #94a3b8; }
+        .output-value { font-size: 0.85rem; font-weight: 600; }
+        .value-high { color: #22c55e; }
+        .value-medium { color: #f59e0b; }
+        .value-low { color: #ef4444; }
+        .operational-value { margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border-left: 3px solid #6366f1; }
+        .operational-value h4 { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 0.4rem; }
+        .operational-value p { font-size: 0.85rem; color: #94a3b8; }
+        .severity-high { color: #ef4444; }
+        .severity-medium { color: #f59e0b; }
+        .severity-low { color: #22c55e; }
+        .uniqueness-high { color: #22c55e; }
+        .uniqueness-medium { color: #f59e0b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="codebase_visualization.html">Architecture</a>
+            <a href="Architecture.html">Architecture</a>
+  <a href="Architecture_Evaluation_Metrics.html">Eval Metrics</a>
+  <a href="Architecture_Evaluation_Splits.html">Eval Splits</a>
+  <a href="Architecture_Evaluation_Stability.html">Eval Stability</a>
+            <a href="01_capabilities.html">Capabilities</a>
+            <a href="02_value_flow.html">Value Flow</a>
+            <a href="03_failure_modes.html">Risk</a>
+            <a href="04_differentiation.html">Differentiation</a>
+            <a href="05_system_dynamics.html">Dynamics</a>
+            <a href="06_operational_scenarios.html">Scenarios</a>
+        </nav>
+        <header>
+            <h1>Competitive Differentiation</h1>
+            <p class="subtitle">The defensible technical advantages that create strategic value</p>
+            <div class="meta">
+                <span>📁 04_differentiation.html</span>
+                <span>⏱ &lt;60s read</span>
+                <span>🎯 What makes this system hard to copy?</span>
+            </div>
+        </header>
+        <div class="narrative">
+            <h2>The Executive Question</h2>
+            <p>Not everything is equally valuable. These four capabilities represent our defensible differentiators — components that are technically difficult to replicate and provide measurable operational advantage.</p>
+        </div>
+        <div class="graph-container">
+            <div id="graph"></div>
+            <div class="legend"><div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div><span>Terrain Reasoning</span></div><div class="legend-item"><div class="legend-dot" style="background:#14b8a6"></div><span>Dual Inference</span></div><div class="legend-item"><div class="legend-dot" style="background:#0ea5e9"></div><span>Causal Eval</span></div><div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div><span>Air-gap Ops</span></div></div>
+        </div>
+        <div class="insight-box">
+            <h3>Key Insights</h3>
+            
+        <div class="insight">
+            <div class="insight-icon">⚡</div>
+            <div class="insight-text">
+                <h4>Terrain-Aware Reasoning</h4>
+                <p>Canonical world frame + cost field propagation. Competitors use simple distance metrics; we model actual traversability.</p>
+            </div>
+        </div>
+        <div class="insight">
+            <div class="insight-icon">🎯</div>
+            <div class="insight-text">
+                <h4>Dual-Path Inference</h4>
+                <p>Only system with parallel static + streaming behavioral inference. Enables both retrospective analysis and live tracking.</p>
+            </div>
+        </div>
+        <div class="insight">
+            <div class="insight-icon">📊</div>
+            <div class="insight-text">
+                <h4>Air-Gap Operable</h4>
+                <p>No external network dependencies. Deployable in classified environments. Competitors require cloud connectivity.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        
+    var nodes = new vis.DataSet([{"id": "diff_terrain", "label": " Terrain-Aware Reasoning", "title": "Canonical world frame + cost field propagation", "color": {"background": "#22c55e", "border": "#22c55e", "highlight": {"background": "#22c55e", "border": "#fff"}}, "font": {"color": "#e2e8f0", "size": 13}, "shape": "box", "x": 0, "y": 0},{"id": "diff_dual", "label": " Dual-Path Behavioral Inference", "title": "Static (scene-level) + Streaming (per-timestep)", "color": {"background": "#14b8a6", "border": "#14b8a6", "highlight": {"background": "#14b8a6", "border": "#fff"}}, "font": {"color": "#e2e8f0", "size": 13}, "shape": "box", "x": 3, "y": 0},{"id": "diff_causal", "label": " Causal Evaluation Layer", "title": "D-effector + critically damped controller", "color": {"background": "#0ea5e9", "border": "#0ea5e9", "highlight": {"background": "#0ea5e9", "border": "#fff"}}, "font": {"color": "#e2e8f0", "size": 13}, "shape": "box", "x": 6, "y": 0},{"id": "diff_offline", "label": " Air-Gap Operable", "title": "No external network calls at runtime", "color": {"background": "#8b5cf6", "border": "#8b5cf6", "highlight": {"background": "#8b5cf6", "border": "#fff"}}, "font": {"color": "#e2e8f0", "size": 13}, "shape": "box", "x": 9, "y": 0}]);
+    var edges = new vis.DataSet([{"from": "diff_terrain", "to": "diff_dual", "arrows": "to", "color": {"color": "#334155", "highlight": "#6366f1"}, "width": 2, "dashed": false},{"from": "diff_dual", "to": "diff_causal", "arrows": "to", "color": {"color": "#334155", "highlight": "#6366f1"}, "width": 2, "dashed": false},{"from": "diff_offline", "to": "diff_terrain", "arrows": "to", "color": {"color": "#334155", "highlight": "#6366f1"}, "width": 2, "dashed": false}]);
+    var container = document.getElementById('graph');
+    var data = {nodes: nodes, edges: edges};
+    var options = {
+        nodes: { borderWidth: 2, shadow: { enabled: true, size: '10px', x: 0, y: 4, color: 'rgba(0,0,0,0.4)' } },
+        edges: { smooth: { type: 'cubicBezier' } },
+        layout: { improvedLayout: true },
+        physics: { enabled: true, barnesHut: { gravitationalConstant: -2000, centralGravity: 0.3, springLength: 150 } },
+        interaction: { hover: true, tooltipDelay: 200 }
+    };
+    var network = new vis.Network(container, data, options);
+    
+    </script>
+</body>
+</html>

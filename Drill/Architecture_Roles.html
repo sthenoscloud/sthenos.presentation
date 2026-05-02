@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture: Roles — sthenos.cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+:root{--primary:#ec4899;--bg-dark:#0f172a;--bg-card:rgba(30,41,59,0.7);--border:rgba(255,255,255,0.1);--text-main:#f8fafc;--text-dim:#94a3b8;--accent:#818cf8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background-color:var(--bg-dark);background-image:radial-gradient(at 0% 0%, rgba(99,102,241,0.15) 0px, transparent 50%),radial-gradient(at 100% 100%, rgba(129,140,248,0.1) 0px, transparent 50%);color:var(--text-main);overflow:hidden;height:100vh}
+.header{position:fixed;top:20px;left:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 24px;border-radius:16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:16px;font-weight:600;background:linear-gradient(135deg,#ec4899,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-meta{display:flex;gap:16px;font-size:12px;color:var(--text-dim)}
+.stat-chip{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:4px 10px;border-radius:20px;font-size:11px}
+.breadcrumb{font-size:12px;color:var(--text-dim);margin-left:16px}
+.breadcrumb a{color:var(--text-dim);text-decoration:none}
+.breadcrumb a:hover{color:var(--text-main)}
+#mynetwork{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1}
+.panel{position:fixed;bottom:20px;left:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border);max-width:320px;max-height:300px;overflow-y:auto}
+.panel h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.cluster-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+.cluster-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.cluster-name{flex:1;font-weight:500}
+.cluster-stats{color:var(--text-dim);font-size:11px;font-family:'JetBrains Mono',monospace}
+.legend{position:fixed;bottom:20px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px;border-radius:16px;border:1px solid var(--border)}
+.legend h3{font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+.legend-shape{width:14px;height:14px;border-radius:3px}
+.tooltip{position:absolute;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;pointer-events:none;z-index:2000;max-width:300px;display:none}
+.tooltip b{color:var(--accent)}
+.search{position:fixed;top:20px;right:300px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--text-main);outline:none;width:200px}
+.search:focus{border-color:var(--primary)}
+.nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:4px;background:var(--bg-card);backdrop-filter:blur(12px);padding:6px 12px;border-radius:12px;border:1px solid var(--border);font-size:11px}
+.nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
+.nav a:hover{background:rgba(255,255,255,0.1);color:var(--text-main)}
+.nav a.active{background:#ec4899;color:white}
+</style>
+</head>
+<body>
+<div class="header">
+  <div style="display:flex;align-items:center">
+    <h1>Roles</h1>
+    <span class="breadcrumb">Architecture → <a href="Architecture.html">Roles</a></span>
+  </div>
+  <div class="header-meta">
+    <span class="stat-chip">31 files</span>
+    <span class="stat-chip">4 classes</span>
+    <span class="stat-chip">24 functions</span>
+    <span class="stat-chip">30 edges</span>
+  </div>
+</div>
+<nav class="nav">
+  <a href="Architecture.html">Overview</a>
+  <a href="Architecture_Core.html">Core</a>
+  <a href="Architecture_Enrichment.html">Enrichment</a>
+  <a href="Architecture_Ingestion.html">Ingestion</a>
+  <a href="Architecture_IO.html">IO</a>
+  <a href="Architecture_Pipeline.html">Pipeline</a>
+  <a href="Architecture_Roles.html">Roles</a>
+  <a href="Architecture_Evaluation_Metrics.html">Eval Metrics</a>
+  <a href="Architecture_Evaluation_Splits.html">Eval Splits</a>
+  <a href="Architecture_Evaluation_Stability.html">Eval Stability</a>
+  <a href="Architecture_CLI.html">CLI</a>
+</nav>
+<input class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
+<div id="mynetwork"></div>
+<div class="panel" id="panel">
+  <h3>Roles Components (31)</h3>
+  <div id="cluster-list">
+    <div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">Role</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">RuleEvaluation</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">RuleResult</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">ScoredRole</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">_check</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">_feature_alignment_for_role</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">_in</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">_normalize</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">_rejection_reason</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">aggregate_scores</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">build_alternatives</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">classify</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_ATTACK_001</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_ATTACK_002</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_ATTACK_003</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_ATTACK_004</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_DEFEND_001</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_DEFEND_002</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_DEFEND_003</span></div><div class="cluster-row"><div class="cluster-dot" style="background:#ec4899"></div><span class="cluster-name">evaluate_R_DEFEND_004</span></div><div class="cluster-row" style="color:var(--text-dim)">+11 more...</div>
+  </div>
+</div>
+<div class="legend">
+  <h3>Node Types</h3>
+  <div class="legend-item"><div class="legend-shape" style="background:#ec4899;border-radius:4px"></div> File / Module</div>
+  <div class="legend-item"><div class="legend-shape" style="background:#1e293b;border-radius:50%;border:2px solid #ec4899"></div> Class</div>
+  <div class="legend-item"><div class="legend-shape" style="background:#0f172a;border:1px solid #475569;transform:rotate(45deg)"></div> Function</div>
+  <div class="legend-item"><div style="width:30px;height:2px;background:#f472b6;border-radius:1px"></div> Cross-module import</div>
+  <div class="legend-item"><div style="width:30px;height:2px;background:#ec4899;opacity:0.4;border-radius:1px"></div> Contains / defines</div>
+</div>
+<div class="tooltip" id="tooltip"></div>
+<script>
+var nodes = new vis.DataSet([{"id":152,"label":"roles/__init__.py","title":"roles/__init__.py\nClasses: 0\nFunctions: 0\n\nHelper function for rule evaluation","color":{"background":"#ec4899","border":"#ec4899","highlight":{"background":"#ec4899","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":2.0,"y":-2.7,"cluster":"Roles"},{"id":153,"label":"roles/rules.py","title":"roles/rules.py\nClasses: 4\nFunctions: 18\n\nRule definitions and evaluation: 12 rules across ATTACKER/SCOUT/DEFENDER","color":{"background":"#ec4899","border":"#ec4899","highlight":{"background":"#ec4899","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":2.0,"y":-0.9,"cluster":"Roles"},{"id":154,"label":"Role","title":"Class: Role\nMethods: \n\nRole enum: ATTACKER, SCOUT, DEFENDER, NULL","color":{"background":"#1e293b","border":"#ec4899","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":3.5,"y":-0.9,"cluster":"Roles"},{"id":155,"label":"RuleResult","title":"Class: RuleResult\nMethods: \n\nResult of a single rule evaluation: trigger, score, reason","color":{"background":"#1e293b","border":"#ec4899","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":3.5,"y":-0.9,"cluster":"Roles"},{"id":156,"label":"ScoredRole","title":"Class: ScoredRole\nMethods: \n\nScored role output: role + confidence + distribution","color":{"background":"#1e293b","border":"#ec4899","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":3.5,"y":-0.9,"cluster":"Roles"},{"id":157,"label":"RuleEvaluation","title":"Class: RuleEvaluation\nMethods: \n\nAggregated rule evaluation across all rules","color":{"background":"#1e293b","border":"#ec4899","highlight":{"background":"#334155","border":"#fff"}},"shape":"ellipse","font":{"color":"#94a3b8","size":10},"x":3.5,"y":-0.9,"cluster":"Roles"},{"id":158,"label":"_check","title":"Function: _check(value, op, threshold)\n\nHelper function for rule evaluation","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-1.1102230246251565e-16,"cluster":"Roles"},{"id":159,"label":"_in","title":"Function: _in(value, band)\n\nHelper function for rule evaluation","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":160,"label":"evaluate_R_ATTACK_001","title":"Function: evaluate_R_ATTACK_001(f, thresholds)\n\nATTACKER rule: checks for direct approach, high speed, team clustering","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":161,"label":"evaluate_R_ATTACK_002","title":"Function: evaluate_R_ATTACK_002(f, thresholds)\n\nATTACKER rule: checks for direct approach, high speed, team clustering","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":162,"label":"evaluate_R_ATTACK_003","title":"Function: evaluate_R_ATTACK_003(f, thresholds)\n\nATTACKER rule: checks for direct approach, high speed, team clustering","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":163,"label":"evaluate_R_ATTACK_004","title":"Function: evaluate_R_ATTACK_004(f, thresholds)\n\nATTACKER rule: checks for direct approach, high speed, team clustering","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":164,"label":"evaluate_R_SCOUT_001","title":"Function: evaluate_R_SCOUT_001(f, thresholds)\n\nSCOUT rule: checks for wide area coverage, low\u505c\u7559, high direction changes","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":165,"label":"evaluate_R_SCOUT_002","title":"Function: evaluate_R_SCOUT_002(f, thresholds)\n\nSCOUT rule: checks for wide area coverage, low\u505c\u7559, high direction changes","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":166,"label":"evaluate_R_SCOUT_003","title":"Function: evaluate_R_SCOUT_003(f, thresholds)\n\nSCOUT rule: checks for wide area coverage, low\u505c\u7559, high direction changes","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":167,"label":"evaluate_R_SCOUT_004","title":"Function: evaluate_R_SCOUT_004(f, thresholds)\n\nSCOUT rule: checks for wide area coverage, low\u505c\u7559, high direction changes","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":168,"label":"evaluate_R_DEFEND_001","title":"Function: evaluate_R_DEFEND_001(f, thresholds)\n\nDEFENDER rule: checks for area holding, low speed, nearby friendly","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":169,"label":"evaluate_R_DEFEND_002","title":"Function: evaluate_R_DEFEND_002(f, thresholds)\n\nDEFENDER rule: checks for area holding, low speed, nearby friendly","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":170,"label":"evaluate_R_DEFEND_003","title":"Function: evaluate_R_DEFEND_003(f, thresholds)\n\nDEFENDER rule: checks for area holding, low speed, nearby friendly","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":171,"label":"evaluate_R_DEFEND_004","title":"Function: evaluate_R_DEFEND_004(f, thresholds)\n\nDEFENDER rule: checks for area holding, low speed, nearby friendly","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":172,"label":"evaluate_R_GENERIC_001","title":"Function: evaluate_R_GENERIC_001(f, thresholds)\n\nevaluate_R_GENERIC_001","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":173,"label":"evaluate_all_rules","title":"Function: evaluate_all_rules(feature_vector, thresholds)\n\nRule definitions and evaluation: 12 rules across ATTACKER/SCOUT/DEFENDER","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.30000000000000004,"cluster":"Roles"},{"id":174,"label":"aggregate_scores","title":"Function: aggregate_scores(rule_results)\n\naggregate_scores","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.6000000000000001,"cluster":"Roles"},{"id":175,"label":"resolve_conflicts","title":"Function: resolve_conflicts(scored_roles)\n\nresolve_conflicts","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":-0.6000000000000001,"cluster":"Roles"},{"id":176,"label":"roles/classifier.py","title":"roles/classifier.py\nClasses: 0\nFunctions: 6\n\nRole classifier: aggregates rule scores via softmax","color":{"background":"#ec4899","border":"#ec4899","highlight":{"background":"#ec4899","border":"#fff"}},"shape":"box","font":{"color":"#e2e8f0","size":11},"margin":8,"x":2.0,"y":0.9,"cluster":"Roles"},{"id":177,"label":"_normalize","title":"Function: _normalize(value, lo, hi)\n\n_normalize","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":1.7999999999999998,"cluster":"Roles"},{"id":178,"label":"_feature_alignment_for_role","title":"Function: _feature_alignment_for_role(feature_vector, role)\n\n_feature_alignment_for_role","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":1.5,"cluster":"Roles"},{"id":179,"label":"classify","title":"Function: classify(feature_vector, return_alternatives)\n\nclassify","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":1.5,"cluster":"Roles"},{"id":180,"label":"build_alternatives","title":"Function: build_alternatives(feature_vector, top_k)\n\nbuild_alternatives","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":1.5,"cluster":"Roles"},{"id":181,"label":"_rejection_reason","title":"Function: _rejection_reason(feature_vector)\n\n_rejection_reason","color":{"background":"#0f172a","border":"#475569","highlight":{"background":"#1e293b","border":"#fff"}},"shape":"diamond","font":{"color":"#64748b","size":9},"x":0.5,"y":1.2,"cluster":"Roles"}]);
+var edges = new vis.DataSet([{"from": 153, "to": 154, "color": {"color": "#ec4899", "opacity": 0.4}, "arrows": "to"}, {"from": 153, "to": 155, "color": {"color": "#ec4899", "opacity": 0.4}, "arrows": "to"}, {"from": 153, "to": 156, "color": {"color": "#ec4899", "opacity": 0.4}, "arrows": "to"}, {"from": 153, "to": 157, "color": {"color": "#ec4899", "opacity": 0.4}, "arrows": "to"}, {"from": 153, "to": 158, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 159, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 160, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 161, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 162, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 163, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 164, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 165, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 166, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 167, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 168, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 169, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 170, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 171, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 172, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 173, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 174, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 153, "to": 175, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 176, "to": 177, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 176, "to": 178, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 176, "to": 179, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 176, "to": 180, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 176, "to": 181, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 176, "to": 182, "color": {"color": "#475569", "opacity": 0.3}, "arrows": "to"}, {"from": 152, "to": 153, "color": {"color": "#f472b6", "opacity": 0.25}, "arrows": "to", "dashes": true}, {"from": 152, "to": 176, "color": {"color": "#f472b6", "opacity": 0.25}, "arrows": "to", "dashes": true}]);
+var container = document.getElementById('mynetwork');
+var data = {nodes:nodes, edges:edges};
+var options = {
+  physics:{enabled:true,barnesHut:{gravitationalConstant:-3000,centralGravity:0.3,springLength:120,springConstant:0.04,damping:0.09},stabilization:{iterations:150}},
+  nodes:{borderWidth:1,shadow:{enabled:true,size:'10px',x:0,y:4,color:'rgba(0,0,0,0.4)'}},
+  edges:{width:1,smooth:{type:'continuous',forceDirection:'none'}},
+  interaction:{hover:true,tooltipDelay:200,hideEdgesOnDrag:true,zoomView:true},
+  layout:{improvedLayout:true,hierarchical:{enabled:false}},
+  groups:{}
+};
+var network = new vis.Network(container,data,options);
+network.on('stabilizationIterationsDone',function(){network.setOptions({physics:{enabled:false}})});
+network.on('hoverNode',function(props){
+  var node = nodes.get(props.node);
+  var tooltip = document.getElementById('tooltip');
+  tooltip.innerHTML = node.title.replace(/\n/g,'<br>');
+  tooltip.style.display = 'block';
+  tooltip.style.left = (props.event.offsetX+15) + 'px';
+  tooltip.style.top = (props.event.offsetY+15) + 'px';
+});
+network.on('blurNode',function(){document.getElementById('tooltip').style.display='none'});
+network.on('click',function(props){
+  if(props.nodes.length>0){
+    var node = nodes.get(props.nodes[0]);
+    document.getElementById('search').value = node.label;
+    filterNodes(node.label);
+  }
+});
+function filterNodes(term){
+  term=term.toLowerCase();
+  if(!term){nodes.update.all().forEach(function(n){n.opacity=1});return;}
+  nodes.forEach(function(n){
+    var match = n.label.toLowerCase().includes(term) || (n.title&&n.title.toLowerCase().includes(term));
+    nodes.update({id:n.id,opacity:match?1:0.15,font:{size:match?13:9}});
+  });
+}
+// Highlight cluster on hover
+network.on('hoverNode',function(props){
+  var node = nodes.get(props.node);
+  if(node&&node.cluster){
+    nodes.forEach(function(n){
+      if(n.cluster===node.cluster){
+        nodes.update({id:n.id,opacity:1});
+      } else if(!document.getElementById('search').value) {
+        nodes.update({id:n.id,opacity:0.6});
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>
