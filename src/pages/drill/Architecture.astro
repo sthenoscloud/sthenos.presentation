@@ -1,5 +1,64 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const modules = [
+  {
+    name: 'Core',
+    color: '#6366f1',
+    desc: 'Core entity, team, and capability models — the foundational data structures used across all layers.',
+    stats: ['14 files', '10 classes', '0 functions', '10 edges'],
+    available: false
+  },
+  {
+    name: 'Enrichment',
+    color: '#10b981',
+    desc: 'Feature extraction, normalization, and behavioral inference — the L3 MVP core transforming raw traces into semantic signals.',
+    stats: ['69 files', '27 classes', '12 functions', '52 edges'],
+    available: false
+  },
+  {
+    name: 'Ingestion',
+    color: '#f59e0b',
+    desc: 'USD loading and breadcrumbs parsing from Caldera data — L2 data normalization layer.',
+    stats: ['50 files', '15 classes', '28 functions', '43 edges'],
+    available: false
+  },
+  {
+    name: 'IO',
+    color: '#ef4444',
+    desc: 'World state adapter and diagnostics — external data exchange and validation interfaces.',
+    stats: ['10 files', '6 classes', '1 functions', '8 edges'],
+    available: false
+  },
+  {
+    name: 'Pipeline',
+    color: '#8b5cf6',
+    desc: 'Diagnostic runner and pipeline orchestration — coordinates the enrichment flow.',
+    stats: ['9 files', '0 classes', '7 functions', '7 edges'],
+    available: false
+  },
+  {
+    name: 'Roles',
+    color: '#ec4899',
+    desc: 'Rule evaluation, score aggregation, and role classification — maps behavioral signals to tactical roles.',
+    stats: ['31 files', '4 classes', '24 functions', '30 edges'],
+    available: false
+  },
+  {
+    name: 'Evaluation',
+    color: '#06b6d4',
+    desc: 'Synthetic validation, edge cases, and adapter diagnostics — testing and quality assurance components.',
+    stats: ['167 files', '34 classes', '118 functions', '156 edges'],
+    available: false
+  },
+  {
+    name: 'CLI',
+    color: '#84cc16',
+    desc: 'Command-line interface for enrichment — user-facing entry point for the pipeline.',
+    stats: ['6 files', '0 classes', '4 functions', '5 edges'],
+    available: false
+  },
+];
 ---
 
 <Layout title="Architecture Overview - Sthenos">
@@ -11,64 +70,37 @@ import Layout from '../../layouts/Layout.astro';
 
   <section class="section" style="background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80');">
     <div class="content">
-      <p class="label">Architecture Overview</p>
+      <p class="label">Reference Documentation</p>
       <h1>7-Layer Defense AI Platform</h1>
-      <p>The complete architecture spans seven distinct layers, from raw inputs to strategic AI simulation.</p>
+      <p>sthenos.cloud transforms incomplete operational datasets (raw movement traces, geometry) into actionable simulation environments for defense AI. The L3 MVP core produces WISDOM-aligned JSON with decision traces.</p>
+
+      <div class="layer-chips">
+        <span class="chip">L1 Raw Inputs</span>
+        <span class="chip">L2 Data Normalization</span>
+        <span class="chip active">L3 Semantic Enrichment</span>
+        <span class="chip">L4 Behavioral & Tactical</span>
+        <span class="chip">L5 Synthetic Data</span>
+        <span class="chip">L6 Decision Support</span>
+        <span class="chip">L7 Strategic AI</span>
+      </div>
     </div>
   </section>
 
   <section class="content-section">
-    <div class="layer-list">
-      <div class="layer-item">
-        <span class="layer-num">L1</span>
-        <span>Raw Inputs (Caldera / Sensors / IoT / Edge)</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-num">L2</span>
-        <span>Data Normalization (USD / JSON / Streams)</span>
-      </div>
-      <div class="layer-item core">
-        <span class="layer-num">L3</span>
-        <span>Semantic Enrichment Layer — Core MVP</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-num">L4</span>
-        <span>Behavioral & Tactical Modeling</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-num">L5</span>
-        <span>Synthetic Data Generation Engine</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-num">L6</span>
-        <span>Decision Support & Scenario Evaluation</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-num">L7</span>
-        <span>Strategic AI / Multi-agent Simulation</span>
-      </div>
-    </div>
-
-    <div class="module-section" style="margin-top: 64px;">
-      <h2>Component Modules</h2>
-      <div class="module-grid">
-        <span class="module-tag" style="border-color: #6366f1;">Core</span>
-        <span class="module-tag" style="border-color: #10b981;">Enrichment</span>
-        <span class="module-tag" style="border-color: #f59e0b;">Ingestion</span>
-        <span class="module-tag" style="border-color: #ef4444;">IO</span>
-        <span class="module-tag" style="border-color: #8b5cf6;">Pipeline</span>
-        <span class="module-tag" style="border-color: #ec4899;">Roles</span>
-      </div>
-    </div>
-
-    <div class="differentiators" style="margin-top: 64px;">
-      <h2>Key Differentiators</h2>
-      <ul class="feature-list">
-        <li>Terrain-aware reasoning (canonical world frame)</li>
-        <li>Dual-path inference (static + streaming)</li>
-        <li>Causal evaluation layer (D-effector)</li>
-        <li>Air-gap operable (no external network calls)</li>
-      </ul>
+    <div class="module-grid">
+      {modules.map(mod => (
+        <div class={`module-card ${!mod.available ? 'disabled' : ''}`}>
+          <div class="card-header">
+            <div class="card-dot" style={`background: ${mod.color}`}></div>
+            <h2>{mod.name}</h2>
+          </div>
+          <p>{mod.desc}</p>
+          <div class="card-stats">
+            {mod.stats.map(stat => <span>{stat}</span>)}
+          </div>
+          {!mod.available && <span class="coming-soon">Coming Soon</span>}
+        </div>
+      ))}
     </div>
   </section>
 </Layout>
@@ -98,74 +130,110 @@ import Layout from '../../layouts/Layout.astro';
     padding: 80px 5%;
   }
 
-  .layer-list {
+  .layer-chips {
     display: flex;
-    flex-direction: column;
     gap: 12px;
-  }
-
-  .layer-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(240, 240, 250, 0.1);
-  }
-
-  .layer-item.core {
-    border: 1px solid var(--ghost-border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    background: rgba(99, 102, 241, 0.1);
-  }
-
-  .layer-num {
-    font-size: 10px;
-    font-weight: 700;
-    opacity: 0.5;
-    min-width: 24px;
-  }
-
-  .layer-item span:last-child {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  h2 {
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 24px;
-    opacity: 0.6;
-  }
-
-  .module-grid {
-    display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    margin-top: 32px;
   }
 
-  .module-tag {
+  .chip {
     padding: 8px 16px;
-    border: 1px solid;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
     border-radius: 20px;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: var(--spectral-white);
+    opacity: 0.5;
   }
 
-  .feature-list {
-    list-style: none;
+  .chip.active {
+    opacity: 1;
+    border-color: rgba(99, 102, 241, 0.6);
+    background: rgba(99, 102, 241, 0.15);
   }
 
-  .feature-list li {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(240, 240, 250, 0.1);
-    font-size: 14px;
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
   }
 
-  .feature-list li:last-child {
-    border-bottom: none;
+  .module-card {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .module-card.disabled {
+    opacity: 0.4;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.96px;
+    margin: 0;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .card-stats span {
+    padding: 4px 8px;
+    background: rgba(240, 240, 250, 0.05);
+    border-radius: 6px;
+    font-size: 11px;
+    font-family: 'D-DIN', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .coming-soon {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 12px;
+    background: rgba(240, 240, 250, 0.1);
+    border: 1px solid rgba(240, 240, 250, 0.2);
+    border-radius: 20px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .module-grid { grid-template-columns: 1fr; }
+    .layer-chips { gap: 8px; }
+    .chip { font-size: 10px; padding: 6px 12px; }
   }
 </style>
