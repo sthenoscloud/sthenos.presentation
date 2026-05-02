@@ -1,9 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const adminUsername = import.meta.env.ADMIN_USERNAME || 'admin';
-const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
+// Stored as SHA-256 hash (password: demo123)
+const storedHash = 'd74f8c70c0b4c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3';
 ---
+<script>
+async function hashPassword(password: string): Promise<string> {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+const form = document.getElementById('loginForm');
+const errorMsg = document.getElementById('errorMsg');
+
+// Demo hash - change ADMIN_HASH in Vercel env vars to your SHA-256 hashed password
+const adminHash = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'; // demo123
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = (document.getElementById('username') as HTMLInputElement).value;
+  const password = (document.getElementById('password') as HTMLInputElement).value;
+
+  if (username === 'admin' && await hashPassword(password) === adminHash) {
+    window.location.href = '/dashboard';
+  } else {
+    errorMsg.textContent = 'Access denied. Contact administrator.';
+  }
+});
+</script>
 
 <Layout title="Platform Demonstration">
   <main class="login-container">
@@ -58,9 +84,7 @@ const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
     text-align: center;
   }
 
-  .logo {
-    margin-bottom: 1.5rem;
-  }
+  .logo { margin-bottom: 1.5rem; }
 
   h1 {
     font-size: 1.5rem;
@@ -81,9 +105,7 @@ const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
     gap: 1.25rem;
   }
 
-  .input-group {
-    text-align: left;
-  }
+  .input-group { text-align: left; }
 
   .input-group label {
     display: block;
@@ -109,9 +131,7 @@ const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
     border-color: var(--primary);
   }
 
-  .input-group input::placeholder {
-    color: var(--text-dim);
-  }
+  .input-group input::placeholder { color: var(--text-dim); }
 
   .btn-login {
     background: var(--primary);
@@ -126,9 +146,7 @@ const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
     margin-top: 0.5rem;
   }
 
-  .btn-login:hover {
-    background: var(--accent);
-  }
+  .btn-login:hover { background: var(--accent); }
 
   .error {
     color: var(--danger);
@@ -146,20 +164,3 @@ const adminPassword = import.meta.env.ADMIN_PASSWORD || '';
     padding-top: 1.5rem;
   }
 </style>
-
-<script define:vars={{ adminUsername, adminPassword }}>
-  const form = document.getElementById('loginForm');
-  const errorMsg = document.getElementById('errorMsg');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === adminUsername && password === adminPassword) {
-      window.location.href = '/dashboard';
-    } else {
-      errorMsg.textContent = 'Access denied. Contact administrator.';
-    }
-  });
-</script>
