@@ -13,8 +13,7 @@ async function hashPassword(password: string): Promise<string> {
 const form = document.getElementById('loginForm');
 const errorMsg = document.getElementById('errorMsg');
 
-// SHA-256 hash of "demo123"
-const adminHash = 'd3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791';
+const adminHash = '07c3d464095514ab6958bd27ddb1866024a036425fee0a90f2ff2e4f403ad6ff';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -40,6 +39,7 @@ form.addEventListener('submit', async (e) => {
       <h1>7-Layer Defense AI</h1>
       <p>Transform incomplete operational datasets into actionable simulation environments for defense AI. The L3 MVP core produces WISDOM-aligned JSON with decision traces.</p>
       <a href="/dashboard" class="ghost-btn">Enter Platform</a>
+      <p class="disclaimer">UNCLASSIFIED // FOR DEMONSTRATION PURPOSES ONLY. This system is a conceptual prototype and does not represent an operational defense capability. No real operational data, classified information, or personally identifiable information is stored or processed.</p>
     </div>
   </section>
 </Layout>
