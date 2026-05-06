@@ -121,7 +121,7 @@ import Layout from '../../layouts/Layout.astro';
     });
     function filterNodes(term){
       term=term.toLowerCase();
-      if(!term){nodes.updateAll().forEach(function(n){n.opacity=1});return;}
+      if(!term){nodes.forEach(function(n){nodes.update({id:n.id,opacity:1})});return;}
       nodes.forEach(function(n){
         var match = n.label.toLowerCase().includes(term) || (n.title&&n.title.toLowerCase().includes(term));
         nodes.update({id:n.id,opacity:match?1:0.15,font:{size:match?13:9}});
@@ -166,7 +166,7 @@ import Layout from '../../layouts/Layout.astro';
   .legend-shape{width:14px;height:14px;border-radius:3px}
   .tooltip{position:absolute;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:12px;pointer-events:none;z-index:2000;max-width:300px;display:none}
   .tooltip b{color:var(--accent)}
-  .search{position:fixed;top:20px;right:300px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--text-main);outline:none;width:200px}
+  .search{position:fixed;top:80px;right:20px;z-index:1000;background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--text-main);outline:none;width:200px}
   .search:focus{border-color:var(--primary)}
   .nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:4px;background:var(--bg-card);backdrop-filter:blur(12px);padding:6px 12px;border-radius:12px;border:1px solid var(--border);font-size:11px}
   .nav a{color:var(--text-dim);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all 0.2s}
