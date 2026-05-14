@@ -50,9 +50,6 @@ form.addEventListener('submit', async (e) => {
         <button type="submit" class="btn-login">Login</button>
         <p id="errorMsg" class="error"></p>
       </form>
-      <div class="cta-links">
-        <a href="/analysis" class="cta-link">View Architectural Analysis</a>
-      </div>
       <p class="disclaimer">UNCLASSIFIED // FOR DEMONSTRATION PURPOSES ONLY. This system is a conceptual prototype and does not represent an operational defense capability. No real operational data, classified information, or personally identifiable information is stored or processed.</p>
       <p class="ownership-notice">The domain <strong>sthenos.cloud</strong> and all associated site content are held in trust and will be transferred to the rightful owner(s) of Sthenos AI upon request — instantly and without condition. All information is kept private and confidential.</p>
     </div>
@@ -172,31 +169,6 @@ form.addEventListener('submit', async (e) => {
   }
 
   .ownership-notice strong {
-    color: var(--spectral-white);
-  }
-
-  .cta-links {
-    margin-top: 24px;
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .cta-link {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 12px 24px;
-    border: 1px solid rgba(99, 102, 241, 0.5);
-    border-radius: 8px;
-    color: var(--spectral-cyan);
-    background: rgba(99, 102, 241, 0.1);
-    transition: all 0.2s;
-  }
-
-  .cta-link:hover {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: var(--spectral-cyan);
     color: var(--spectral-white);
   }
 </style>
