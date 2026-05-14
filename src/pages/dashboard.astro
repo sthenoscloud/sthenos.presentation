@@ -49,6 +49,14 @@ if (!sessionStorage.getItem('sthenos_auth')) {
     </div>
   </section>
 
+  <!-- CTA SECTION -->
+  <div class="cta-bar">
+    <a href="/analysis" class="cta-link">
+      <span class="cta-title">Architectural Comparison</span>
+      <span class="cta-desc">THEON + Twin Prime vs sthenos.cloud — Layer by layer analysis</span>
+    </a>
+  </div>
+
   <!-- CAPABILITIES SECTION -->
   <section id="capabilities" class="section" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80');">
     <div class="content">
@@ -248,7 +256,7 @@ if (!sessionStorage.getItem('sthenos_auth')) {
   </section>
 
   <!-- VALUE FLOW SECTION -->
-  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80');">
+  <section id="value-flow" class="section" style="background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80');">
     <div class="content">
       <p class="label">Value Flow</p>
       <h2>Data to Intelligence</h2>
@@ -295,7 +303,7 @@ if (!sessionStorage.getItem('sthenos_auth')) {
   </section>
 
   <!-- FAILURE MODES SECTION -->
-  <section class="section" style="background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&q=80');">
+  <section id="failure-modes" class="section" style="background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&q=80');">
     <div class="content">
       <p class="label">Risk Assessment</p>
       <h2>Failure Modes</h2>
@@ -354,13 +362,6 @@ if (!sessionStorage.getItem('sthenos_auth')) {
           <h3>Air-Gap Operable</h3>
           <p>No external network dependencies. Deployable in classified environments. Competitors require cloud connectivity.</p>
         </div>
-      </div>
-
-      <div class="cta-section">
-        <a href="/analysis" class="cta-btn">
-          <span class="cta-title">Architectural Comparison</span>
-          <span class="cta-desc">THEON + Twin Prime vs sthenos.cloud — Layer by layer analysis</span>
-        </a>
       </div>
     </div>
   </section>
@@ -708,6 +709,50 @@ document.getElementById('signOut')?.addEventListener('click', (e) => {
   }
 
   .ownership-notice strong {
+    color: var(--spectral-white);
+  }
+
+  /* CTA BAR */
+  .cta-bar {
+    background: #000;
+    padding: 32px 5%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .cta-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 48px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .cta-link:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--spectral-cyan);
+    transform: translateY(-2px);
+  }
+
+  .cta-bar .cta-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--spectral-white);
+  }
+
+  .cta-bar .cta-desc {
+    font-size: 12px;
+    opacity: 0.7;
     color: var(--spectral-white);
   }
 
