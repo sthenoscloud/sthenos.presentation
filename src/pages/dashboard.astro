@@ -2,6 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+<script>
+// Auth check
+if (!sessionStorage.getItem('sthenos_auth')) {
+  window.location.href = '/';
+}
+</script>
+
 <Layout title="Dashboard - Sthenos">
   <nav>
     <a href="/">Sthenos</a>
@@ -350,7 +357,15 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- LOGOUT -->
   <div class="logout-section">
-    <a href="/" class="ghost-btn">Sign Out</a>
+    <a href="/" id="signOut" class="ghost-btn">Sign Out</a>
+
+<script>
+document.getElementById('signOut')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  sessionStorage.removeItem('sthenos_auth');
+  window.location.href = '/';
+});
+</script>
     <p class="classification">UNCLASSIFIED // FOR DEMONSTRATION ONLY</p>
     <p class="ownership-notice">The domain <strong>sthenos.cloud</strong> and all associated site content are held in trust and will be transferred to the rightful owner(s) of Sthenos AI upon request — instantly and without condition. All information is kept private and confidential.</p>
   </div>

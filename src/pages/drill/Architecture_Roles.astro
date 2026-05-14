@@ -2,6 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 
+<script>
+if (!sessionStorage.getItem('sthenos_auth')) {
+  window.location.href = '/';
+}
+</script>
+
 <Layout title="Architecture: Roles - Sthenos">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

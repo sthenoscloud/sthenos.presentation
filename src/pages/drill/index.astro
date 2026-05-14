@@ -26,6 +26,12 @@ const availablePages = pages.filter(p => p.available);
 const unavailablePages = pages.filter(p => !p.available);
 ---
 
+<script>
+if (!sessionStorage.getItem('sthenos_auth')) {
+  window.location.href = '/';
+}
+</script>
+
 <Layout title="Architecture Drill - Sthenos">
   <nav>
     <a href="/">Sthenos</a>

@@ -2,6 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+<script>
+// Auth check
+if (!sessionStorage.getItem('sthenos_auth')) {
+  window.location.href = '/';
+}
+</script>
+
 <Layout title="Competitive Analysis - Sthenos">
   <nav>
     <a href="/">Sthenos</a>

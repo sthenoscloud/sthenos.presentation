@@ -21,6 +21,7 @@ form.addEventListener('submit', async (e) => {
   const password = (document.getElementById('password') as HTMLInputElement).value;
 
   if (username === 'admin' && await hashPassword(password) === adminHash) {
+    sessionStorage.setItem('sthenos_auth', '1');
     window.location.href = '/dashboard';
   } else {
     errorMsg.textContent = 'Access denied. Contact administrator.';

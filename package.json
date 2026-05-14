@@ -11,6 +11,8 @@
     "@astrojs/react": "^5.0.4",
     "astro": "^6.2.0",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "vis-data": "^8.0.3",
+    "vis-network": "^10.0.2"
   }
 }

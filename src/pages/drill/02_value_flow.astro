@@ -2,6 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 
+<script>
+if (!sessionStorage.getItem('sthenos_auth')) {
+  window.location.href = '/';
+}
+</script>
+
 <Layout title="Value Flow - Sthenos">
   <nav>
     <a href="/">Sthenos</a>
