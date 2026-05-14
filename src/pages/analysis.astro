@@ -1,0 +1,787 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Competitive Analysis - Sthenos">
+  <nav>
+    <a href="/">Sthenos</a>
+    <a href="/#summary">Summary</a>
+    <a href="/#comparison">Comparison</a>
+    <a href="/#analysis">Analysis</a>
+  </nav>
+
+  <!-- COVER -->
+  <section class="section cover" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80');">
+    <div class="content">
+      <p class="label">Architectural Comparison</p>
+      <h1>Marketing vs. Engineering Reality</h1>
+      <p class="subtitle">Feasible at marketing level. Non-trivial at system level.<br/>The gap between AI integration claims and deployable real-time multimodal reasoning.</p>
+      <div class="meta">
+        <span>sthenos.cloud vs. THEON + Twin Prime</span>
+        <span>UNCLASSIFIED // FOR OFFICIAL USE ONLY</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section id="summary" class="section" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);">
+    <div class="content">
+      <p class="label">Executive Summary</p>
+      <h2>The Critical Gap</h2>
+
+      <div class="gap-callout">
+        <div class="gap-icon">⚠</div>
+        <div class="gap-text">
+          <strong>The announcement describes a standard but aggressive defense-AI commercialization path.</strong>
+          <p>sthenos.cloud operates at a <em>higher abstraction level</em> — state + uncertainty + control loop design. The two are not naturally compatible; integration requires translation layers, not model insertion.</p>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-item feasible">
+          <h3>Technically Doable</h3>
+          <ul>
+            <li>Offline or near-real-time multimodal fusion</li>
+            <li>Edge inference on constrained hardware</li>
+            <li>Decision support (not autonomous control)</li>
+          </ul>
+        </div>
+        <div class="summary-item not-feasible">
+          <h3>Not Directly Doable</h3>
+          <ul>
+            <li>Full "native reasoning" in real-time contested environments</li>
+            <li>Seamless plug-in of frontier models into legacy optronics</li>
+            <li>Safe deployment without domain adaptation + certification</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="key-insight">
+        <p>The critical constraint is <strong>not model capability</strong>. It is <strong>system integration under latency, reliability, and classification constraints</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURAL COMPARISON -->
+  <section id="comparison" class="section" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="content">
+      <p class="label">Architecture Comparison</p>
+      <h2>Stack Divergence Analysis</h2>
+
+      <div class="comparison-table">
+        <div class="table-header">
+          <div>Layer</div>
+          <div>THEON + Twin Prime</div>
+          <div>sthenos.cloud</div>
+          <div>Key Divergence</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Primary Goal</div>
+          <div>Operational AI embedded in defense products</div>
+          <div>Adaptive inference + enrichment + behavioral/probabilistic modeling</div>
+          <div>Product vs. meta-system</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Core Paradigm</div>
+          <div>Sensor fusion → AI reasoning → operator output</div>
+          <div>Probabilistic inference + coherence + uncertainty-aware state evolution</div>
+          <div>Deterministic output vs. belief dynamics</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Model Role</div>
+          <div>Embedded decision-support model</div>
+          <div>Component inside evolving inference/control loop</div>
+          <div>Static inference vs. dynamic system</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Uncertainty</div>
+          <div>Thresholding / confidence scores</div>
+          <div>Explicit state-level uncertainty propagation</div>
+          <div>Scalar confidence vs. structured uncertainty</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Runtime</div>
+          <div>Edge constrained, real-time, hardened</div>
+          <div>Flexible compute + adaptive orchestration</div>
+          <div>Fixed embedded vs. adaptive execution</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Failure Mode</div>
+          <div>Fallback to legacy optronics modes</div>
+          <div>Structural recovery + manifold stabilization</div>
+          <div>Redundancy vs. active stabilization</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Adaptivity</div>
+          <div>Limited (model updates offline)</div>
+          <div>Continuous inference adaptation</div>
+          <div>Static vs. continuous learning loop</div>
+        </div>
+        <div class="table-row">
+          <div class="cell-label">Control</div>
+          <div>Output-driven (recommendation/action)</div>
+          <div>State-driven (belief evolution + control coupling)</div>
+          <div>Action layer vs. state layer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSUMPTIONS ANALYSIS -->
+  <section id="analysis" class="section" style="background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);">
+    <div class="content">
+      <p class="label">Critical Analysis</p>
+      <h2>Hidden Assumptions</h2>
+
+      <div class="assumption-grid">
+        <div class="assumption-card">
+          <div class="assump-num">1</div>
+          <h3>Assumption: Frontier AI = Operational AI</h3>
+          <p class="claim">"frontier AI models can be directly operationalized in edge defense systems"</p>
+          <div class="reality">
+            <span class="reality-label">Reality:</span>
+            <p>Requires quantization, pruning, deterministic fallbacks, and strict runtime guarantees.</p>
+          </div>
+        </div>
+        <div class="assumption-card">
+          <div class="assump-num">2</div>
+          <h3>Assumption: Multimodal = Actionable</h3>
+          <p class="claim">"multimodal reasoning equals actionable operational output"</p>
+          <div class="reality">
+            <span class="reality-label">Reality:</span>
+            <p>Outputs are probabilistic; operators need bounded confidence + explainability + fail-safe behavior.</p>
+          </div>
+        </div>
+        <div class="assumption-card">
+          <div class="assump-num">3</div>
+          <h3>Assumption: Clean Sensor Data</h3>
+          <p class="claim">"sensor data is clean, labeled, and consistently aligned across modalities"</p>
+          <div class="reality">
+            <span class="reality-label">Reality:</span>
+            <p>Miscalibration, drift, missing modalities, and adversarial noise dominate.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="counter-argument">
+        <h3>Counter-Argument Not Addressed</h3>
+        <div class="counter-grid">
+          <div class="counter-item implicit">
+            <span class="counter-label">Implicit Assumption</span>
+            <p>"AI model capability is the bottleneck"</p>
+          </div>
+          <div class="counter-item explicit">
+            <span class="counter-label">Counterpoint</span>
+            <p>In defense systems, the bottleneck is almost always <strong>integration, certification, and operational doctrine alignment</strong>, not model intelligence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAILURE MODE -->
+  <section class="section failure" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);">
+    <div class="content">
+      <p class="label">Single-Point Failure</p>
+      <h2>Systemic Risk: Latency + Reliability Mismatch</h2>
+
+      <div class="failure-scenario">
+        <p>If inference exceeds strict timing budgets or degrades under partial sensor loss:</p>
+        <div class="failure-outcomes">
+          <div class="failure-outcome">
+            <span class="outcome-icon">✕</span>
+            <p>System gets disabled (mission failure)</p>
+          </div>
+          <div class="failure-outcome">
+            <span class="outcome-icon">↓</span>
+            <p>Downgraded to legacy pipeline (AI becomes unused overhead)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="failure-quote">
+        <p>"This is the most common failure mode in defense AI integration programs: <em>works in lab, bypassed in field</em>."</p>
+      </div>
+
+      <div class="integration-path">
+        <h3>Constructive Resolution Path</h3>
+        <div class="path-grid">
+          <div class="path-item">
+            <span class="path-num">A</span>
+            <div>
+              <h4>Hard Boundary: Model → Belief Adapter</h4>
+              <p>Convert outputs into probabilistic state updates, not direct actions</p>
+            </div>
+          </div>
+          <div class="path-item">
+            <span class="path-num">B</span>
+            <div>
+              <h4>Uncertainty Translation Layer</h4>
+              <p>Map confidence scores → variance/noise parameters in inference engine</p>
+            </div>
+          </div>
+          <div class="path-item">
+            <span class="path-num">C</span>
+            <div>
+              <h4>Decouple Runtime Domains</h4>
+              <p>Edge: inference only. Core: aggregation, coherence correction, drift detection</p>
+            </div>
+          </div>
+          <div class="path-item">
+            <span class="path-num">D</span>
+            <div>
+              <h4>Adversarial Robustness Gate</h4>
+              <p>Force degradation into known-safe regimes when sensor disagreement or entropy spikes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM LINE -->
+  <section class="section bottom-line" style="background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0f 100%);">
+    <div class="content">
+      <p class="label">Bottom Line</p>
+      <h2>Positioning Statement</h2>
+
+      <div class="position-grid">
+        <div class="position-theirs">
+          <h3>THEON + Twin Prime</h3>
+          <p>AI as a <strong>subsystem</strong> inside a weaponized or operational product</p>
+        </div>
+        <div class="position-divider">vs</div>
+        <div class="position-ours">
+          <h3>sthenos.cloud</h3>
+          <p>AI as a <strong>closed-loop inference and control system</strong> over evolving beliefs</p>
+        </div>
+      </div>
+
+      <div class="anchor-statement">
+        <p>Even superior models do not translate into advantage if operators distrust outputs, certification blocks deployment cycles, or the system cannot degrade gracefully under uncertainty.</p>
+      </div>
+
+      <div class="classification">
+        <p>UNCLASSIFIED // FOR OFFICIAL USE ONLY</p>
+        <p class="ownership-notice">The domain <strong>sthenos.cloud</strong> and all associated site content are held in trust and will be transferred to the rightful owner(s) of Sthenos AI upon request — instantly and without condition.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 32px;
+    padding: 24px 5%;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+  }
+
+  nav a {
+    text-transform: uppercase;
+    letter-spacing: 1.17px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--spectral-white);
+  }
+
+  nav a:hover { opacity: 0.7; }
+
+  .section {
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .meta {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+  }
+
+  /* Gap Callout */
+  .gap-callout {
+    display: flex;
+    gap: 24px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+
+  .gap-icon {
+    font-size: 32px;
+  }
+
+  .gap-text strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #ff6b6b;
+  }
+
+  .gap-text p {
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .gap-text em {
+    color: var(--spectral-cyan);
+  }
+
+  /* Summary Grid */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .summary-item {
+    padding: 32px;
+    border-radius: 12px;
+  }
+
+  .summary-item.feasible {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  .summary-item.not-feasible {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .summary-item h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .summary-item ul {
+    list-style: none;
+    font-size: 14px;
+  }
+
+  .summary-item li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .summary-item li:last-child {
+    border-bottom: none;
+  }
+
+  .key-insight {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+    padding: 24px 32px;
+    text-align: center;
+  }
+
+  .key-insight p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .key-insight strong {
+    color: var(--spectral-cyan);
+  }
+
+  /* Comparison Table */
+  .comparison-table {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 180px;
+    gap: 1px;
+    background: rgba(99, 102, 241, 0.2);
+    padding: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 180px;
+    gap: 1px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: var(--space-black);
+  }
+
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  .cell-label {
+    font-weight: 700;
+    color: var(--spectral-cyan);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Assumption Grid */
+  .assumption-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .assumption-card {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+  }
+
+  .assump-num {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--space-black);
+    border: 1px solid var(--ghost-border);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .assumption-card h3 {
+    font-size: 14px;
+    margin-bottom: 16px;
+    margin-top: 8px;
+  }
+
+  .claim {
+    font-size: 13px;
+    opacity: 0.7;
+    padding: 12px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .reality {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 16px;
+  }
+
+  .reality-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--spectral-cyan);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .reality p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Counter Argument */
+  .counter-argument {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    padding: 32px;
+  }
+
+  .counter-argument h3 {
+    margin-bottom: 24px;
+  }
+
+  .counter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .counter-item {
+    padding: 24px;
+    border-radius: 8px;
+  }
+
+  .counter-item.implicit {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .counter-item.explicit {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .counter-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+
+  .counter-item p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Failure Section */
+  .failure-scenario {
+    margin-bottom: 32px;
+  }
+
+  .failure-scenario > p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .failure-outcomes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .failure-outcome {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+  }
+
+  .outcome-icon {
+    font-size: 24px;
+    color: #ff6b6b;
+  }
+
+  .failure-outcome p {
+    font-size: 14px;
+  }
+
+  .failure-quote {
+    background: rgba(99, 102, 241, 0.1);
+    border-left: 4px solid var(--spectral-cyan);
+    padding: 24px 32px;
+    margin-bottom: 48px;
+  }
+
+  .failure-quote p {
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .failure-quote em {
+    color: var(--spectral-cyan);
+  }
+
+  /* Integration Path */
+  .integration-path h3 {
+    margin-bottom: 24px;
+  }
+
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .path-item {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 8px;
+  }
+
+  .path-num {
+    font-size: 24px;
+    font-weight: 700;
+    opacity: 0.3;
+    min-width: 32px;
+  }
+
+  .path-item h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .path-item p {
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  /* Bottom Line */
+  .position-grid {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .position-theirs,
+  .position-ours {
+    flex: 1;
+    padding: 32px;
+    border-radius: 12px;
+  }
+
+  .position-theirs {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .position-ours {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .position-theirs h3,
+  .position-ours h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .position-theirs p,
+  .position-ours p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .position-divider {
+    font-size: 24px;
+    font-weight: 700;
+    opacity: 0.3;
+  }
+
+  .anchor-statement {
+    background: var(--ghost-surface);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .anchor-statement p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .classification {
+    text-align: center;
+  }
+
+  .classification p:first-child {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.4;
+    margin-bottom: 16px;
+  }
+
+  .ownership-notice {
+    font-size: 11px;
+    opacity: 0.6;
+    max-width: 480px;
+    margin: 16px auto 0;
+    line-height: 1.6;
+    border-left: 2px solid rgba(240, 240, 250, 0.3);
+    padding-left: 12px;
+    text-align: left;
+  }
+
+  .ownership-notice strong {
+    color: var(--spectral-white);
+  }
+
+  @media (max-width: 768px) {
+    nav { gap: 16px; flex-wrap: wrap; }
+    nav a { font-size: 10px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 24px; }
+    .summary-grid, .assumption-grid, .failure-outcomes, .path-grid, .counter-grid, .position-grid { grid-template-columns: 1fr; }
+    .table-header, .table-row { grid-template-columns: 1fr; gap: 8px; }
+    .table-header > div:not(:first-child) { display: none; }
+    .table-row > div:not(:first-child) { display: block; }
+    .position-divider { display: none; }
+  }
+
+  @media print {
+    .section { min-height: auto; page-break-after: always; }
+    nav { display: none; }
+  }
+</style>
